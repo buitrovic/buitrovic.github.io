@@ -1,228 +1,174 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Sendas y rutas por Jérica</title>
+<meta charset="UTF-8">
+<title>Sendas y rutas por Jérica</title>
 
-  <style>
-    /* Reset básico */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  color: #fff;
-  position: relative;
-  overflow: hidden;
+<style>
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-body::before {
+/* ===== ESTRUCTURA GENERAL ===== */
+body {
+  color: #fff;
+  background: #999;
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero::before {
   content: "";
   position: absolute;
   inset: 0;
   background:
     linear-gradient(
-      rgba(0, 0, 0, 0.45),
-      rgba(0, 0, 0, 0.45)
+      rgba(0,0,0,0.45),
+      rgba(0,0,0,0.45)
     ),
     url("fondo.jpg") center 15% / 115% no-repeat;
-
   z-index: -1;
 }
 
+/* ===== HEADER ===== */
+header {
+  text-align: center;
+  padding: 40px 20px;
+}
 
+header h1 {
+  font-size: 3rem;
+  text-shadow: 0 4px 8px rgba(0,0,0,0.6);
+}
 
+/* ===== MAIN ===== */
+main {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+}
 
-    /* TÍTULO */
-    header {
-      text-align: center;
-      padding-top: 50px;
-    }
+/* ===== BOTONES ===== */
+.boton {
+  width: 260px;
+  padding: 30px 20px;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  border-radius: 14px;
+  text-decoration: none;
+  color: #fff;
+  background: rgba(0,0,0,0.65);
+  border: 2px solid rgba(255,255,255,0.5);
+  transition: transform 0.2s, background 0.2s;
+  cursor: pointer;
+  position: relative;
+}
 
-    header h1 {
-      font-size: 3rem;
-      font-weight: bold;
-      text-shadow: 0 4px 8px rgba(0,0,0,0.6);
-    }
+.boton:hover {
+  transform: scale(1.05);
+  background: rgba(0,0,0,0.8);
+}
 
-    /* BOTONES */
-    main {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 60px;
-      flex-grow: 1;
-    }
+.inactivo {
+  opacity: 0.45;
+  pointer-events: none;
+}
 
-    .boton {
-      width: 260px;
-      padding: 30px 20px;
-      text-align: center;
-      font-size: 1.4rem;
-      font-weight: bold;
-      border-radius: 14px;
-      text-decoration: none;
-      color: #fff;
-      background: rgba(0, 0, 0, 0.65);
-      border: 2px solid rgba(255,255,255,0.5);
-      transition: transform 0.2s, background 0.2s;
-      cursor: pointer;
-      position: relative;
-    }
+/* ===== TOOLTIP (SOLO PC) ===== */
+@media (hover:hover) {
+  .boton[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: -55px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.85);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+}
 
-    .boton:hover {
-      transform: scale(1.05);
-      background: rgba(0, 0, 0, 0.8);
-    }
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 15px;
+  font-size: 0.9rem;
+  background: rgba(0,0,0,0.5);
+}
 
-    /* Botón inactivo */
-    .inactivo {
-      opacity: 0.45;
-      cursor: default;
-      pointer-events: none;
-    }
-
-    /* TOOLTIP */
-    .boton[data-tooltip]:hover::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: -55px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,0.85);
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      white-space: nowrap;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.6);
-    }
-
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 15px;
-      font-size: 0.9rem;
-      background: rgba(0,0,0,0.5);
-    }
-	
-	
-
-    /* Responsive */
-    @media (max-width: 700px) {
-      main {
-        flex-direction: column;
-        gap: 30px;
-      }
-
-      header h1 {
-        font-size: 2.2rem;
-      }
-    }
-	
-	
-
-
-
-
-/* ===== FONDO EN MÓVIL (DEFINICIÓN COMPLETA + FOOTER VISIBLE) ===== */
+/* ===== RESPONSIVE MÓVIL ===== */
 @media (max-width: 700px) {
 
-  body {
-    height: auto;
-    min-height: 100vh;
-    overflow-y: auto;
+  .hero {
+    min-height: auto;
   }
 
-  main {
-    flex-grow: 0;
-    padding-bottom: 20px;
-  }
-
-  footer {
-    position: relative;
-    margin-top: 20px;
-  }
-
-  body::before {
+  .hero::before {
     background:
       linear-gradient(
-        rgba(0, 0, 0, 0.45),
-        rgba(0, 0, 0, 0.45)
+        rgba(0,0,0,0.45),
+        rgba(0,0,0,0.45)
       ),
       url("fondo.jpg") top center / contain no-repeat;
   }
-}
 
+  header h1 {
+    font-size: 2.2rem;
+  }
 
-* ===== FIX DEFINITIVO FOOTER EN MÓVIL ===== */
-@media (max-width: 700px) {
-
-  /* El contenido deja de ocupar toda la pantalla */
   main {
-    flex-grow: 0;
-    align-items: stretch;
+    flex-direction: column;
+    gap: 25px;
     padding: 20px 0;
   }
-
-  /* Aseguramos que el footer entra en el flujo */
-  footer {
-    position: static;
-    display: block;
-    width: 100%;
-  }
 }
-
-/* ===== MOBILE: FLUJO NORMAL PARA QUE APAREZCA EL FOOTER ===== */
-@media (max-width: 700px) {
-
-  body {
-    display: block;   /* ← ESTA ES LA CLAVE REAL */
-    height: auto;
-    overflow-y: auto;
-  }
-
-}
-  </style>
+</style>
 </head>
 
 <body>
+
+<div class="hero">
 
   <header>
     <h1>Sendas y rutas por Jérica</h1>
   </header>
 
-<main>
-  <!-- BOTÓN SENDAS (ACTIVO, NUEVA PESTAÑA) -->
-  <a
-    href="sendas/index.html"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="boton"
-    data-tooltip="Aquí se ven las sendas grabadas."
-  >
-    Sendas <span style="font-size:0.9em;">↗</span>
-  </a>
+  <main>
+    <a
+      href="sendas/index.html"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="boton"
+      data-tooltip="Aquí se ven las sendas grabadas."
+    >
+      Sendas ↗
+    </a>
 
-  <!-- BOTÓN RUTAS CIRCULARES (PREPARADO PARA EL FUTURO) -->
-  <div
-    class="boton inactivo"
-    title="Próximamente"
-  >
-    Rutas circulares
-  </div>
-</main>
+    <div class="boton inactivo">
+      Rutas circulares
+    </div>
+  </main>
 
-  <footer>
-    Página en construcción. Contacto: butradiego@hotmail.com
-  </footer>
+</div>
+
+<footer>
+  Página en construcción. Contacto: butradiego@hotmail.com
+</footer>
 
 </body>
 </html>
