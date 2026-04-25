@@ -128,28 +128,36 @@ body::before {
     }
 	
 	
-/* ===== AÑADIDO PARA MÓVIL (FONDO Y SCROLL) ===== */
+
+
+
+
+/* ===== FONDO EN MÓVIL (DEFINICIÓN COMPLETA + FOOTER VISIBLE) ===== */
 @media (max-width: 700px) {
+
   body {
     height: auto;
     min-height: 100vh;
     overflow-y: auto;
   }
 
-  body::before {
-    background-attachment: scroll;
-    transform: scale(1);
+  main {
+    flex-grow: 0;
+    padding-bottom: 20px;
   }
-}
 
+  footer {
+    position: relative;
+    margin-top: 20px;
+  }
 
-
-/* ===== FONDO EN MÓVIL: MOSTRAR IMAGEN COMPLETA ===== */
-@media (max-width: 700px) {
   body::before {
-    background-size: contain;
-	
-background-position: top center;
+    background:
+      linear-gradient(
+        rgba(0, 0, 0, 0.45),
+        rgba(0, 0, 0, 0.45)
+      ),
+      url("fondo.jpg") top center / contain no-repeat;
   }
 }
 
