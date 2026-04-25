@@ -162,6 +162,24 @@ body::before {
 }
 
 
+* ===== FIX DEFINITIVO FOOTER EN MÓVIL ===== */
+@media (max-width: 700px) {
+
+  /* El contenido deja de ocupar toda la pantalla */
+  main {
+    flex-grow: 0;
+    align-items: stretch;
+    padding: 20px 0;
+  }
+
+  /* Aseguramos que el footer entra en el flujo */
+  footer {
+    position: static;
+    display: block;
+    width: 100%;
+  }
+}
+
   </style>
 </head>
 
