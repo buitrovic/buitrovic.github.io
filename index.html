@@ -138,19 +138,16 @@ footer {
         rgba(0,0,0,0.45),
         rgba(0,0,0,0.45)
       ),
-     url("fondo2.jpg") 10% center / 125% no-repeat;
+     url("fondo2.jpg") center / 100% no-repeat;
   }
 
   header h1 {
     font-size: 1.5rem;
   }
 
-  main {
-    flex-direction: column;
-    gap: 25px;
-    padding: 20px 0;
-  }
-  
+main {
+  display: none;
+}
   
 .boton {
     width: 50%;
@@ -173,8 +170,10 @@ footer {
 
 <div class="hero">
 
+<button id="menu-toggle" aria-label="Menú">☰</
+
   <header>
-    <h1>Sendas y rutas por Jérica</h1>
+    <h1>Jérica en BTT: sendas y rutas</h1>
   </header>
 
   <main>
@@ -198,6 +197,14 @@ footer {
 <footer>
   Página en construcción. Contacto: butradiego@hotmail.com
 </footer>
+
+
+<nav id="mobile-menu">
+  <a href="sendas/index.html">Sendas</a>
+  <a class="disabled">Rutas circulares</a>
+  <a href="#">Información</a>
+</nav>
+
 
 </body>
 </html>
