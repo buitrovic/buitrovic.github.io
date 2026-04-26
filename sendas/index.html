@@ -18,22 +18,6 @@
     #map {
       height: 100vh;
     }
-	
-
-.leaflet-tooltip {
-  background: rgba(0, 0, 0, 0.75);
-  color: white;
-  border-radius: 6px;
-  padding: 3px 8px;
-  font-size: 12px;
-  font-weight: bold;
-  border: none;
-}
-	
-	
-	
-	
-	
   </style>
 </head>
 
@@ -75,81 +59,32 @@ const labels = L.tileLayer(
        ===================================== */
     const rutas = [
       {
-        nombre: "senda 1",
-		gpx: "1.gpx",
+        gpx: "1.gpx",
         url: "https://youtu.be/B6VvOnKYdPg",
         color: "blue"
       },
       {
-        nombre: "senda 2",
-		gpx: "2.gpx",
+        gpx: "2.gpx",
         url: "https://youtu.be/N859GPHNy0A",
         color: "red"
-      },
- {
-        nombre: "senda lateral Albares",
-		gpx: "Senda lateral Albares.gpx",
-        url: "https://www.youtube.com/watch?v=Ay8jkCy4HZQ",
-        color: "green"
       }
-
-      
     ];
 
     /* =====================================
        CARGA DE RUTAS
        ===================================== */
-const gpxLayer = new L.GPX(ruta.gpx, {
-  async: true,
-  polyline_options: {
-    color: ruta.color,
-    weight: 4
-  },
-  marker_options: {
-    startIconUrl: null,
-    endIconUrl: null,
-    shadowUrl: null
-  }
-});
+    rutas.forEach(ruta => {
+      const gpxLayer = new L.GPX(ruta.gpx, {
+        async: true,
+        polyline_options: {
+          color: ruta.color,
+          weight: 4
+        }
+      });
 
-gpxLayer.on("loaded", e => {
-
-  // Ajustar mapa a la ruta (como ya hacías)
-  map.fitBounds(e.target.getBounds(), { padding: [20, 20] });
-
-  // ===============================
-  // MARCADOR EN EL INICIO DEL GPX
-  // ===============================
-
-// Obtener los puntos del track
-const trackLayer = e.target.getLayers()[0];
-const puntos = trackLayer.getLatLngs();
-
-// Primer punto REAL del track (soporta arrays anidados)
-const inicio = Array.isArray(puntos[0]) ? puntos[0][0] : puntos[0];
-
-
-
-  // Crear marcador
-  const marker = L.marker(inicio).addTo(map);
-
-  // Etiqueta visible
-  marker.bindTooltip(
-    ruta.nombre,
-    {
-      permanent: true,
-      direction: "top",
-      offset: [0, -10]
-    }
-  );
-
-  // Click en el marcador = abrir vídeo
-  marker.on("click", () => {
-    window.open(ruta.url, "_blank");
-  });
-
-});
-
+      gpxLayer.on("loaded", e => {
+        map.fitBounds(e.target.getBounds(), { padding: [20, 20] });
+      });
 
       gpxLayer.on("click", () => {
         window.open(ruta.url, "_blank");
