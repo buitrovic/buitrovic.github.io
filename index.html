@@ -1,271 +1,157 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
+  <title>Rutas GPX</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sendas y rutas por Jérica</title>
+  <!-- Leaflet -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  >
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<style>
-/* RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
+  <!-- Leaflet GPX plugin -->
+  <script src="https://unpkg.com/leaflet-gpx/gpx.js"></script>
 
+  <style>
+    #map {
+      height: 100vh;
+    }
+	
 
-html {
-  font-size: 100%;
-}
-
-
-/* ===== ESTRUCTURA GENERAL ===== */
-body {
-  color: #fff;
-  background: #999;
-  
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-
-}
-
-/* ===== HERO ===== */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-#menu-toggle {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  font-size: 28px;
-  background: none;
-  border: none;
+.leaflet-tooltip {
+  background: rgba(0, 0, 0, 0.75);
   color: white;
-  cursor: pointer;
-  z-index: 1001;
-}
-
-
-
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      rgba(0,0,0,0.45),
-      rgba(0,0,0,0.45)
-    ),
-    url("fondo.jpg") center 15% / 115% no-repeat;
-  z-index: -1;
-}
-
-/* ===== HEADER ===== */
-header {
-  text-align: center;
-  padding: 40px 20px;
-}
-
-header h1 {
-  font-size: 3rem;
-  text-shadow: 0 4px 8px rgba(0,0,0,0.6);
-}
-
-/* ===== MAIN ===== */
-main {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 60px;
-}
-
-/* ===== BOTONES ===== */
-.boton {
-  width: 260px;
-  padding: 30px 20px;
-  text-align: center;
-  font-size: 1.4rem;
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 12px;
   font-weight: bold;
-  border-radius: 14px;
-  text-decoration: none;
-  color: #fff;
-  background: rgba(0,0,0,0.65);
-  border: 2px solid rgba(255,255,255,0.5);
-  transition: transform 0.2s, background 0.2s;
-  cursor: pointer;
-  position: relative;
+  border: none;
 }
-
-.boton:hover {
-  transform: scale(1.05);
-  background: rgba(0,0,0,0.8);
-}
-
-.inactivo {
-  opacity: 0.45;
-  pointer-events: none;
-}
-
-/* ===== TOOLTIP (SOLO PC) ===== */
-@media (hover:hover) {
-  .boton[data-tooltip]:hover::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: -55px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0,0,0,0.85);
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    white-space: nowrap;
-  }
-}
-
-/* ===== FOOTER ===== */
-footer {
-  text-align: center;
-  padding: 15px;
-  font-size: 0.9rem;
-  background: rgba(0,0,0,0.5);
-  margin-top: auto;
-}
-
-/* ===== RESPONSIVE MÓVIL ===== */
-@media (max-width: 700px) {
-
-.hero {
-  min-height: 100svh;
-   justify-content: center;
-}
-
-  .hero::before {
-    background:
-      linear-gradient(
-        rgba(0,0,0,0.45),
-        rgba(0,0,0,0.45)
-      ),
-     url("fondo2.jpg") top center / cover no-repeat;
-  }
-
-  header h1 {
-    font-size: 1.5rem;
-  }
-
-main {
-  display: none;
-}
-  
-.boton {
-    width: 50%;
-    max-width: 340px;
-    font-size: 0.7rem;
-    padding: 22px 20px;
-  }
-
-  footer {
-    font-size: 0.5rem;
-  }
-
-  
-  
-}
-
-@media (min-width: 701px) {
-  #menu-toggle {
-    display: none;
-  }
-}
-
-#mobile-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100svh;
-  background: rgba(0,0,0,0.95);
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
-  z-index: 1000;
-}
-
-#mobile-menu a {
-  color: white;
-  font-size: 1.6rem;
-  text-decoration: none;
-}
-
-#mobile-menu .disabled {
-  opacity: 0.4;
-  pointer-events: none;
-}
-
-#mobile-menu.open {
-  display: flex;
-}
-</style>
+	
+	
+	
+	
+	
+  </style>
 </head>
 
 <body>
 
-<div class="hero">
+  <div id="map"></div>
 
-<button id="menu-toggle" aria-label="Menú">☰</button>
-
-  <header>
-    <h1>Jérica en BTT: sendas y rutas</h1>
-  </header>
-
-  <main>
-    <a
-      href="sendas/index.html"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="boton"
-      data-tooltip="Aquí se ven las sendas grabadas."
-    >
-      Sendas ↗
-    </a>
-
-    <div class="boton inactivo">
-      Rutas circulares
-    </div>
-  </main>
-
-</div>
-
-<footer>
-  Página en construcción. Contacto: butradiego@hotmail.com
-</footer>
+  <script>
+    /* =====================================
+       MAPA
+       ===================================== */
+   const map = L.map("map").setView([39.8, -0.2], 9);
 
 
-<nav id="mobile-menu">
-  <a href="sendas/index.html">Sendas</a>
-  <a class="disabled">Rutas circulares</a>
-  <a href="#">Información</a>
-</nav>
+
+/* L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", {
+  attribution: "© OpenStreetMap · © OpenTopoMap",
+  maxZoom: 17
+}).addTo(map);*/
+// Capa satélite (ESRI)
+const satelite = L.tileLayer(
+  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+  {
+    attribution: "© Esri · Maxar · Earthstar Geographics"
+  }
+).addTo(map);
+
+// Capa de etiquetas y carreteras
+const labels = L.tileLayer(
+  "https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
+  {
+    attribution: "© Esri"
+  }
+).addTo(map);
 
 
-<script>
-  const toggle = document.getElementById("menu-toggle");
-  const menu = document.getElementById("mobile-menu");
+    /* =====================================
+       GPX + URL ASOCIADA
+       ===================================== */
+    const rutas = [
+      {
+        nombre: "senda 1",
+		gpx: "1.gpx",
+        url: "https://youtu.be/B6VvOnKYdPg",
+        color: "blue"
+      },
+      {
+        nombre: "senda 2",
+		gpx: "2.gpx",
+        url: "https://youtu.be/N859GPHNy0A",
+        color: "red"
+      },
+ {
+        nombre: "senda lateral Albares",
+		gpx: "Senda lateral Albares.gpx",
+        url: "https://www.youtube.com/watch?v=Ay8jkCy4HZQ",
+        color: "green"
+      }
 
-  toggle.addEventListener("click", () => {
-    menu.classList.toggle("open");
+      
+    ];
+
+    /* =====================================
+       CARGA DE RUTAS
+       ===================================== */
+    rutas.forEach(ruta => {
+      const gpxLayer = new L.GPX(ruta.gpx, {
+        async: true,
+        polyline_options: {
+          color: ruta.color,
+          weight: 4
+        }
+      });
+
+gpxLayer.on("loaded", e => {
+
+  // Ajustar mapa a la ruta (como ya hacías)
+  map.fitBounds(e.target.getBounds(), { padding: [20, 20] });
+
+  // ===============================
+  // MARCADOR EN EL INICIO DEL GPX
+  // ===============================
+
+// Obtener los puntos del track
+const trackLayer = e)const trackLayer = e.target.getLayers()[0];
+const inicio = Array.isArray(puntos[0]) ? puntos[0][0] : puntos[0];
+const puntos = trackLayer.getLatLngs();
+
+
+
+  // Crear marcador
+  const marker = L.marker(inicio).addTo(map);
+
+  // Etiqueta visible
+  marker.bindTooltip(
+    ruta.nombre,
+    {
+      permanent: true,
+      direction: "top",
+      offset: [0, -10]
+    }
+  );
+
+  // Click en el marcador = abrir vídeo
+  marker.on("click", () => {
+    window.open(ruta.url, "_blank");
   });
-</script>
+
+});
+
+
+      gpxLayer.on("click", () => {
+        window.open(ruta.url, "_blank");
+      });
+
+      gpxLayer.addTo(map);
+    });
+  </script>
 
 </body>
 </html>
