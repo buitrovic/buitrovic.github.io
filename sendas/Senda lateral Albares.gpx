@@ -9,29 +9,27 @@
     <text>WTracks</text>
     <type>text/html</type>
   </link>
-  <time>2026-04-26T21:16:58.515Z</time>
+  <time>2026-04-26T21:17:22.539Z</time>
   <bounds minlat="39.859616" minlon="-0.606737" maxlat="39.903942" maxlon="-0.470095"/>
 </metadata>
 <wpt lat="39.874143" lon="-0.559487"><ele>615</ele><name>Senda lateral Albares</name><desc>Divertida</desc></wpt>
-<trk>
-  <trkseg>
-    <trkpt lat="39.869886" lon="-0.560077"><ele>610.115</ele><time>2024-03-09T12:43:44.461Z</time></trkpt>
-    <trkpt lat="39.870981" lon="-0.562153"><ele>608.109</ele><time>2024-03-09T12:43:54.461Z</time></trkpt>
-    <trkpt lat="39.871978" lon="-0.561767"><ele>612.045</ele><time>2024-03-09T12:44:14.461Z</time></trkpt>
-    <trkpt lat="39.872039" lon="-0.561231"><ele>613.546</ele><time>2024-03-09T12:44:24.461Z</time></trkpt>
-    <trkpt lat="39.872879" lon="-0.560356"><ele>611.593</ele><time>2024-03-09T12:44:54.461Z</time></trkpt>
-    <trkpt lat="39.872963" lon="-0.560485"><ele>612.474</ele><time>2024-03-09T12:45:04.461Z</time></trkpt>
-    <trkpt lat="39.874246" lon="-0.559431"><ele>608.961</ele><time>2024-03-09T12:45:54.461Z</time></trkpt>
-    <trkpt lat="39.874876" lon="-0.558524"><ele>605.049</ele><time>2024-03-09T12:46:24.461Z</time></trkpt>
-    <trkpt lat="39.875264" lon="-0.558444"><ele>601.958</ele><time>2024-03-09T12:46:44.461Z</time></trkpt>
-    <trkpt lat="39.875643" lon="-0.558149"><ele>597.216</ele><time>2024-03-09T12:46:54.461Z</time></trkpt>
-    <trkpt lat="39.875993" lon="-0.55842"><ele>592.91</ele><time>2024-03-09T12:47:34.461Z</time></trkpt>
-    <trkpt lat="39.876368" lon="-0.558272"><ele>586.427</ele><time>2024-03-09T12:47:54.461Z</time></trkpt>
-    <trkpt lat="39.876567" lon="-0.558377"><ele>582.968</ele><time>2024-03-09T12:48:04.461Z</time></trkpt>
-    <trkpt lat="39.876997" lon="-0.557602"><ele>571.014</ele><time>2024-03-09T12:48:24.461Z</time></trkpt>
-    <trkpt lat="39.877156" lon="-0.5578"><ele>568.409</ele><time>2024-03-09T12:48:44.461Z</time></trkpt>
-    <trkpt lat="39.877339" lon="-0.557787"><ele>567.414</ele><time>2024-03-09T12:48:54.461Z</time></trkpt>
-    <trkpt lat="39.877516" lon="-0.557207"><ele>569.235</ele><time>2024-03-09T12:49:14.461Z</time></trkpt>
-    <trkpt lat="39.878496" lon="-0.556483"><ele>576.382</ele><time>2024-03-09T12:49:54.461Z</time></trkpt>
-  </trkseg>
-</trk></gpx>
+<rte>
+  <rtept lat="39.869886" lon="-0.560077"><ele>610.115</ele><time>2024-03-09T12:43:44.461Z</time></rtept>
+  <rtept lat="39.870981" lon="-0.562153"><ele>608.109</ele><time>2024-03-09T12:43:54.461Z</time></rtept>
+  <rtept lat="39.871978" lon="-0.561767"><ele>612.045</ele><time>2024-03-09T12:44:14.461Z</time></rtept>
+  <rtept lat="39.872039" lon="-0.561231"><ele>613.546</ele><time>2024-03-09T12:44:24.461Z</time></rtept>
+  <rtept lat="39.872879" lon="-0.560356"><ele>611.593</ele><time>2024-03-09T12:44:54.461Z</time></rtept>
+  <rtept lat="39.872963" lon="-0.560485"><ele>612.474</ele><time>2024-03-09T12:45:04.461Z</time></rtept>
+  <rtept lat="39.874246" lon="-0.559431"><ele>608.961</ele><time>2024-03-09T12:45:54.461Z</time></rtept>
+  <rtept lat="39.874876" lon="-0.558524"><ele>605.049</ele><time>2024-03-09T12:46:24.461Z</time></rtept>
+  <rtept lat="39.875264" lon="-0.558444"><ele>601.958</ele><time>2024-03-09T12:46:44.461Z</time></rtept>
+  <rtept lat="39.875643" lon="-0.558149"><ele>597.216</ele><time>2024-03-09T12:46:54.461Z</time></rtept>
+  <rtept lat="39.875993" lon="-0.55842"><ele>592.91</ele><time>2024-03-09T12:47:34.461Z</time></rtept>
+  <rtept lat="39.876368" lon="-0.558272"><ele>586.427</ele><time>2024-03-09T12:47:54.461Z</time></rtept>
+  <rtept lat="39.876567" lon="-0.558377"><ele>582.968</ele><time>2024-03-09T12:48:04.461Z</time></rtept>
+  <rtept lat="39.876997" lon="-0.557602"><ele>571.014</ele><time>2024-03-09T12:48:24.461Z</time></rtept>
+  <rtept lat="39.877156" lon="-0.5578"><ele>568.409</ele><time>2024-03-09T12:48:44.461Z</time></rtept>
+  <rtept lat="39.877339" lon="-0.557787"><ele>567.414</ele><time>2024-03-09T12:48:54.461Z</time></rtept>
+  <rtept lat="39.877516" lon="-0.557207"><ele>569.235</ele><time>2024-03-09T12:49:14.461Z</time></rtept>
+  <rtept lat="39.878496" lon="-0.556483"><ele>576.382</ele><time>2024-03-09T12:49:54.461Z</time></rtept>
+</rte></gpx>
