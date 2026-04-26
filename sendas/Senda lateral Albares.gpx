@@ -9,10 +9,10 @@
     <text>WTracks</text>
     <type>text/html</type>
   </link>
-  <time>2026-04-26T20:31:24.924Z</time>
-  <bounds minlat="39.866816" minlon="-0.573735" maxlat="39.877899" maxlon="-0.539575"/>
+  <time>2026-04-26T21:16:58.515Z</time>
+  <bounds minlat="39.859616" minlon="-0.606737" maxlat="39.903942" maxlon="-0.470095"/>
 </metadata>
-<wpt lat="39.870029" lon="-0.560153"><ele>607</ele><name>Senda lateral Albares</name></wpt>
+<wpt lat="39.874143" lon="-0.559487"><ele>615</ele><name>Senda lateral Albares</name><desc>Divertida</desc></wpt>
 <trk>
   <trkseg>
     <trkpt lat="39.869886" lon="-0.560077"><ele>610.115</ele><time>2024-03-09T12:43:44.461Z</time></trkpt>
