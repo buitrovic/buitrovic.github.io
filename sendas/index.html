@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Rutas GPX</title>
+
+  <!-- Leaflet -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  >
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Leaflet GPX plugin -->
+  <script src="https://unpkg.com/leaflet-gpx/gpx.js"></script>
+
+  <style>
+    #map {
+      height: 100vh;
+    }
+	
+
+.leaflet-tooltip {
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 12px;
+  font-weight: bold;
+  border: none;
+}
+	
+	
+	
+	
+	
+  </style>
+</head>
+
+<body>
+
+  <div id="map"></div>
+
+  <script>
+    /* =====================================
+       MAPA
+       ===================================== */
+   const map = L.map("map").setView([39.8, -0.2], 9);
+
+
+
+/* L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", {
+  attribution: "© OpenStreetMap · © OpenTopoMap",
+  maxZoom: 17
+}).addTo(map);*/
+// Capa satélite (ESRI)
+const satelite = L.tileLayer(
+  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+  {
+    attribution: "© Esri · Maxar · Earthstar Geographics"
+  }
+).addTo(map);
+
+// Capa de etiquetas y carreteras
+const labels = L.tileLayer(
+  "https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
+  {
+    attribution: "© Esri"
+  }
+).addTo(map);
+
+
+    /* =====================================
+       GPX + URL ASOCIADA
+       ===================================== */
+    const rutas = [
+      {
+        nombre: "senda 1",
+		gpx: "1.gpx",
+        url: "https://youtu.be/B6VvOnKYdPg",
+        color: "blue"
+      },
+      {
+        nombre: "senda 2",
+		gpx: "2.gpx",
+        url: "https://youtu.be/N859GPHNy0A",
+        color: "red"
+      },
+ {
+        nombre: "senda lateral Albares",
+		gpx: "Senda lateral Albares.gpx",
+        url: "https://www.youtube.com/watch?v=Ay8jkCy4HZQ",
+        color: "green"
+      }
+
+      
+    ];
+
+    /* =====================================
+       CARGA DE RUTAS
+       ===================================== */
+    rutas.forEach(ruta => {
+      const gpxLayer = new L.GPX(ruta.gpx, {
+        async: true,
+        polyline_options: {
+          color: ruta.color,
+          weight: 4
+        }
+      });
+
+gpxLayer.on("loaded", e => {
+
+  // Ajustar mapa a la ruta (como ya hacías)
+  map.fitBounds(e.target.getBounds(), { padding: [20, 20] });
+
+  // ===============================
+  // MARCADOR EN EL INICIO DEL GPX
+  // ===============================
+
+  // Obtener los puntos del track
+  const trackLayer = e.target.getLayers()[0];
+  const puntos = trackLayer.getLatLngs();
+
+  // Primer punto = inicio de la ruta
+  const inicio = puntos[0];
+
+  // Crear marcador
+  const marker = L.marker(inicio).addTo(map);
+
+  // Etiqueta visible
+  marker.bindTooltip(
+    ruta.nombre,
+    {
+      permanent: true,
+      direction: "top",
+      offset: [0, -10]
+    }
+  );
+
+  // Click en el marcador = abrir vídeo
+  marker.on("click", () => {
+    window.open(ruta.url, "_blank");
+  });
+
+});
+
+
+      gpxLayer.on("click", () => {
+        window.open(ruta.url, "_blank");
+      });
+
+      gpxLayer.addTo(map);
+    });
+  </script>
+
+</body>
+</html>
