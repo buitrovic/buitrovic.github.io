@@ -117,12 +117,12 @@ gpxLayer.on("loaded", e => {
   // MARCADOR EN EL INICIO DEL GPX
   // ===============================
 
-  // Obtener los puntos del track
-  const trackLayer = e.target.getLayers()[0];
-  const puntos = trackLayer.getLatLngs();
+// Obtener los puntos del track
+const trackLayer = e)const trackLayer = e.target.getLayers()[0];
+const inicio = Array.isArray(puntos[0]) ? puntos[0][0] : puntos[0];
+const puntos = trackLayer.getLatLngs();
 
-  // Primer punto = inicio de la ruta
-  const inicio = puntos[0];
+
 
   // Crear marcador
   const marker = L.marker(inicio).addTo(map);
