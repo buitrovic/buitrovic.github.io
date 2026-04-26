@@ -118,9 +118,11 @@ gpxLayer.on("loaded", e => {
   // ===============================
 
 // Obtener los puntos del track
-const trackLayer = e)const trackLayer = e.target.getLayers()[0];
-const inicio = Array.isArray(puntos[0]) ? puntos[0][0] : puntos[0];
+const trackLayer = e.target.getLayers()[0];
 const puntos = trackLayer.getLatLngs();
+
+// Primer punto REAL del track (soporta arrays anidados)
+const inicio = Array.isArray(puntos[0]) ? puntos[0][0] : puntos[0];
 
 
 
