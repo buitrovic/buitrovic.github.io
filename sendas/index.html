@@ -99,14 +99,18 @@ const labels = L.tileLayer(
     /* =====================================
        CARGA DE RUTAS
        ===================================== */
-    rutas.forEach(ruta => {
-      const gpxLayer = new L.GPX(ruta.gpx, {
-        async: true,
-        polyline_options: {
-          color: ruta.color,
-          weight: 4
-        }
-      });
+const gpxLayer = new L.GPX(ruta.gpx, {
+  async: true,
+  polyline_options: {
+    color: ruta.color,
+    weight: 4
+  },
+  marker_options: {
+    startIconUrl: null,
+    endIconUrl: null,
+    shadowUrl: null
+  }
+});
 
 gpxLayer.on("loaded", e => {
 
