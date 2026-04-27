@@ -113,9 +113,28 @@ const labels = L.tileLayer(
       // 1. Dibujamos la línea de la ruta (esto ya te funcionaba)
       const gpxLayer = new L.GPX(ruta.gpx, {
         async: true,
-        polyline_options: { color: ruta.color, weight: 6, opacity: 0.8 },
-        marker_options: { startIconUrl: null, endIconUrl: null, shadowUrl: null, wptIconUrls: { '': null } }
+        polyline_options: {
+          color: ruta.color,
+          weight: 6,
+          opacity: 0.8
+        },
+        marker_options: {
+          startIconUrl: null, // Quitamos la gota del inicio
+          shadowUrl: null,
+          // Creamos la X con código directamente aquí
+          endIconUrl: 'data:image/svg+xml;base64,' + btoa(`
+            <svg xmlns="http://w3.org" width="30" height="30" viewBox="0 0 30 30">
+              <circle cx="15" cy="15" r="13" fill="white" stroke="red" stroke-width="2"/>
+              <line x1="9" y1="9" x2="21" y2="21" stroke="red" stroke-width="4" stroke-linecap="round"/>
+              <line x1="21" y1="9" x2="9" y2="21" stroke="red" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+          `),
+          iconSize: [30, 30],
+          iconAnchor: [15, 15],
+          wptIconUrls: { '': null }
+        }
       }).addTo(map);
+
 
       gpxLayer.on("loaded", e => map.fitBounds(e.target.getBounds(), { padding: [20, 20] }));
       gpxLayer.on("click", () => window.open(ruta.url, "_blank"));
