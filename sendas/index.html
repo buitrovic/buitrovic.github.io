@@ -115,6 +115,7 @@ const labels = L.tileLayer(
               offset: [0, -10]
             })
             .addTo(map);
+			.on("click", () => window.open(ruta.url, "_blank")); // Abre el link al tocar el texto
           }
         });
       });
