@@ -47,6 +47,11 @@
       }
     }
 
+    /* Elimina las sombras y los iconos por defecto que no hayamos definido nosotros */
+    .leaflet-marker-icon[src*="marker-icon"] {
+        display: none !important;
+    }
+
   </style>
 </head>
 
