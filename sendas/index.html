@@ -18,6 +18,21 @@
     #map {
       height: 100vh;
     }
+	
+	
+	    .etiqueta-visible div {
+      background: white;
+      border: 2px solid #333;
+      color: black;
+      font-weight: bold;
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+      white-space: nowrap;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+      font-size: 13px;
+    }
+
   </style>
 </head>
 
@@ -89,36 +104,36 @@ const labels = L.tileLayer(
         }
       });
 
-       gpxLayer.on("loaded", function(e) {
+            gpxLayer.on("loaded", function(e) {
         const gpx = e.target;
         map.fitBounds(gpx.getBounds(), { padding: [20, 20] });
 
-        // Extraemos los Waypoints directamente del análisis del GPX
-        const waypoints = gpx.get_waypoints();
-        
-        waypoints.forEach(wp => {
-          // wp.name es el texto que hay en <name> dentro del GPX
-          if (wp.name) {
-            console.log("Creando etiqueta para:", wp.name); // Para debug
-            
-            // Creamos un marcador invisible solo para sostener la etiqueta
-            L.marker(wp.latlng, {
-              icon: L.divIcon({
-                className: 'contenedor-invisible',
-                html: '' 
+        // Usamos un pequeño retraso para asegurar que el plugin ha terminado de "limpiar" el mapa
+        setTimeout(() => {
+          const waypoints = gpx.get_waypoints();
+          
+          waypoints.forEach(wp => {
+            if (wp.name) {
+              // Creamos una etiqueta de texto real, no un tooltip
+              L.marker(wp.latlng, {
+                icon: L.divIcon({
+                  className: 'etiqueta-visible', // Tu estilo CSS
+                  html: `<div>${wp.name}</div>`,
+                  iconSize: [120, 20], // Tamaño aproximado del área del texto
+                  iconAnchor: [60, 10] // Centrado sobre el punto
+                }),
+                interactive: true // Para que se pueda clicar
               })
-            })
-            .bindTooltip(wp.name, {
-              permanent: true,
-              direction: 'top',
-              className: 'etiqueta-visible', // Tu estilo CSS
-              offset: [0, -10]
-            })
-            .addTo(map);
-			.on("click", () => window.open(ruta.url, "_blank")); // Abre el link al tocar el texto
-          }
-        });
+              .addTo(map)
+              .on("click", (event) => {
+                L.DomEvent.stopPropagation(event);
+                window.open(ruta.url, "_blank");
+              });
+            }
+          });
+        }, 500); // Espera medio segundo tras la carga
       });
+
 
 
   // Al hacer clic en la línea, abre YouTube
