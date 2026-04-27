@@ -96,8 +96,10 @@ const labels = L.tileLayer(
 
         // Buscamos los Waypoints para ponerles la etiqueta permanente
         gpx.getLayers().forEach(layer => {
-          if (layer instanceof L.Marker && layer.options.title) {
-            layer.bindTooltip(layer.options.title, {
+		
+		  const nombrePunto = layer.options.name || layer.options.title;
+          if (layer instanceof L.Marker && nombrePunto) {
+            layer.bindTooltip(nombrePunto, {
               permanent: true,
               direction: 'top',
               className: 'etiqueta-visible',
