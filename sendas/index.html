@@ -15,126 +15,79 @@
   <script src="https://unpkg.com/leaflet-gpx/gpx.js"></script>
 
   <style>
-    #map {
-      height: 100vh;
+    #map { height: 100vh; }
+    
+    /* ESTILO PARA LAS ETIQUETAS SIEMPRE VISIBLES */
+    .etiqueta-ruta {
+        background: white;
+        border: 2px solid #333;
+        border-radius: 4px;
+        padding: 2px 6px;
+        font-weight: bold;
+        font-size: 13px;
+        color: #000;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
     }
-	
-	
-	.leaflet-tooltip.mi-etiqueta {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid #333;
-  border-radius: 4px;
-  padding: 2px 5px;
-  font-weight: bold;
-  font-size: 12px;
-}
-
-	
-	
-	
-  </style>
+    /* Quitar la flechita del tooltip para que parezca una etiqueta limpia */
+    .leaflet-tooltip-top:before { border-top-color: transparent; }
+</style>
 </head>
 
 <body>
 
   <div id="map"></div>
 
-  <script>
-    /* =====================================
-       MAPA
-       ===================================== */
-   const map = L.map("map").setView([39.8, -0.2], 9);
+ <script>
+    const map = L.map("map").setView([39.8, -0.2], 9);
 
+    const satelite = L.tileLayer("https://arcgisonline.com{z}/{y}/{x}", {
+        attribution: "© Esri"
+    }).addTo(map);
 
+    const labels = L.tileLayer("https://arcgisonline.com{z}/{y}/{x}").addTo(map);
 
-/* L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", {
-  attribution: "© OpenStreetMap · © OpenTopoMap",
-  maxZoom: 17
-}).addTo(map);*/
-// Capa satélite (ESRI)
-const satelite = L.tileLayer(
-  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-  {
-    attribution: "© Esri · Maxar · Earthstar Geographics"
-  }
-).addTo(map);
-
-// Capa de etiquetas y carreteras
-const labels = L.tileLayer(
-  "https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
-  {
-    attribution: "© Esri"
-  }
-).addTo(map);
-
-
-    /* =====================================
-       GPX + URL ASOCIADA
-       ===================================== */
     const rutas = [
-      {
-        gpx: "1.gpx",
-        url: "https://youtu.be/B6VvOnKYdPg",
-        color: "blue"
-      },
-      {
-        gpx: "2.gpx",
-        url: "https://youtu.be/N859GPHNy0A",
-        color: "red"
-      },
- {
-        gpx: "Senda lateral Albares.gpx",
-        url: "https://www.youtube.com/watch?v=Ay8jkCy4HZQ",
-        color: "green"
-      }
-
-      
+        { gpx: "1.gpx", url: "https://youtu.be", color: "blue" },
+        { gpx: "2.gpx", url: "https://youtu.be", color: "red" },
+        { gpx: "Senda lateral Albares.gpx", url: "https://youtube.com", color: "green" }
     ];
 
-       /* =====================================
-       CARGA DE RUTAS
-       ===================================== */
     rutas.forEach(ruta => {
-      const gpxLayer = new L.GPX(ruta.gpx, {
-        async: true,
-        polyline_options: {
-          color: ruta.color,
-          weight: 4
-        },
-        // Desactivamos los marcadores por defecto para manejarlos nosotros
-        marker_options: {
-          startIconUrl: null,
-          endIconUrl: null,
-          shadowUrl: null
-        }
-      });
-
-      gpxLayer.on("loaded", e => {
-        const gpx = e.target;
-        map.fitBounds(gpx.getBounds(), { padding: [20, 20] });
-
-        // ESTO ES LO QUE BUSCAS:
-        // Buscamos los Waypoints (puntos de interés) del archivo GPX
-        gpx.getLayers().forEach(layer => {
-          // Si la capa es un marcador (punto) y tiene nombre
-          if (layer instanceof L.Marker && layer.options.title) {
-            layer.bindTooltip(layer.options.title, {
-              permanent: true,   // Hace que sea siempre visible
-              direction: 'top',  // Posición encima del punto
-              className: 'mi-etiqueta' // Clase CSS por si quieres darle estilo
-            }).addTo(map);
-          }
+        const gpxLayer = new L.GPX(ruta.gpx, {
+            async: true,
+            polyline_options: { color: ruta.color, weight: 5, opacity: 0.8 },
+            marker_options: {
+                startIconUrl: null, // Quitamos iconos de inicio/fin para no tapar el texto
+                endIconUrl: null,
+                shadowUrl: null,
+                wptIconUrls: { '': null } // Evitamos que ponga iconos de chincheta por defecto
+            }
         });
-      });
 
-      gpxLayer.on("click", () => {
-        window.open(ruta.url, "_blank");
-      });
+        gpxLayer.on("loaded", function(e) {
+            map.fitBounds(e.target.getBounds(), { padding: [50, 50] });
+            
+            // Forzamos la lectura de los Waypoints (puntos de interés)
+            const gpx = e.target;
+            gpx.getLayers().forEach(layer => {
+                // Buscamos capas que tengan opciones de nombre (Waypoints)
+                if (layer instanceof L.Marker && layer.options.title) {
+                    layer.bindTooltip(layer.options.title, {
+                        permanent: true,
+                        direction: 'top',
+                        className: 'etiqueta-ruta',
+                        offset: [0, -10] // Ajuste para que no pise el punto exacto
+                    }).addTo(map);
+                }
+            });
+        });
 
-      gpxLayer.addTo(map);
+        // Hacer que toda la ruta sea clicable hacia YouTube
+        gpxLayer.on("click", () => window.open(ruta.url, "_blank"));
+        
+        gpxLayer.addTo(map);
     });
-
-  </script>
+</script>
 
 </body>
 </html>
