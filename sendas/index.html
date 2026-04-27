@@ -21,18 +21,20 @@
 	
 	
     .etiqueta-visible div {
-      background: white;
-      border: 2px solid #333;
-      color: black;
-      font-weight: bold;
-      padding: 3px 8px;
-      border-radius: 5px;
-      display: inline-block;
-      white-space: nowrap;
-      box-shadow: 3px 3px 10px rgba(0,0,0,0.4);
-      font-size: 14px;
-      transform: translate(-50%, -100%); /* Para centrarla sobre el punto */
+      background: white !important;
+      border: 2px solid #333 !important;
+      color: black !important;
+      font-weight: bold !important;
+      padding: 4px 8px !important;
+      border-radius: 5px !important;
+      display: inline-block !important;
+      white-space: nowrap !important;
+      box-shadow: 3px 3px 10px rgba(0,0,0,0.4) !important;
+      font-size: 14px !important;
+      transform: translate(-50%, -100%); /* Centra el texto sobre la coordenada */
+      position: absolute;
     }
+
 
   </style>
 </head>
@@ -97,57 +99,42 @@ const labels = L.tileLayer(
        CARGA DE RUTAS (SOLUCIÓN DEFINITIVA)
        ===================================== */
     rutas.forEach(ruta => {
+      // 1. Dibujamos la línea de la ruta (esto ya te funcionaba)
       const gpxLayer = new L.GPX(ruta.gpx, {
         async: true,
-        polyline_options: {
-          color: ruta.color,
-          weight: 6, // Un poco más grueso para tablets
-          opacity: 0.8
-        },
-        marker_options: {
-          startIconUrl: null,
-          endIconUrl: null,
-          shadowUrl: null,
-          wptIconUrls: { '': null }
-        }
-      });
+        polyline_options: { color: ruta.color, weight: 6, opacity: 0.8 },
+        marker_options: { startIconUrl: null, endIconUrl: null, shadowUrl: null, wptIconUrls: { '': null } }
+      }).addTo(map);
 
-      gpxLayer.on("loaded", function(e) {
-        map.fitBounds(e.target.getBounds(), { padding: [20, 20] });
-
-        // Buscamos los marcadores que el plugin ha creado
-        e.target.eachLayer(function(layer) {
-          // Si es un marcador y tiene un título (el nombre del waypoint)
-          if (layer instanceof L.Marker && layer.options.title) {
-            
-            // CREAMOS UNA ETIQUETA REAL (No tooltip)
-            const etiquetaCustom = L.marker(layer.getLatLng(), {
-              icon: L.divIcon({
-                className: 'etiqueta-visible',
-                html: `<div>${layer.options.title}</div>`,
-                iconSize: [100, 20],
-                iconAnchor: [50, 10]
-              }),
-              interactive: true
-            });
-
-            etiquetaCustom.addTo(map);
-            
-            // Hacer que la etiqueta también lleve a YouTube
-            etiquetaCustom.on("click", () => window.open(ruta.url, "_blank"));
-            
-            // Eliminamos el marcador original "invisible" para que no moleste
-            map.removeLayer(layer);
-          }
-        });
-      });
-
-      // El clic en la línea sigue funcionando
+      gpxLayer.on("loaded", e => map.fitBounds(e.target.getBounds(), { padding: [20, 20] }));
       gpxLayer.on("click", () => window.open(ruta.url, "_blank"));
 
-      gpxLayer.addTo(map);
-    });
+      // 2. FUERZA BRUTA: Leemos el archivo a mano para sacar los nombres de los puntos
+      fetch(ruta.gpx)
+        .then(response => response.text())
+        .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+        .then(data => {
+          const wpts = data.querySelectorAll("wpt");
+          wpts.forEach(wpt => {
+            const lat = wpt.getAttribute("lat");
+            const lon = wpt.getAttribute("lon");
+            const name = wpt.querySelector("name") ? wpt.querySelector("name").textContent : null;
 
+            if (name && lat && lon) {
+              // Creamos la etiqueta de texto puro
+              L.marker([lat, lon], {
+                icon: L.divIcon({
+                  className: 'etiqueta-visible',
+                  html: `<div>${name}</div>`,
+                  iconSize: [0, 0] // No ocupa espacio físico
+                })
+              })
+              .addTo(map)
+              .on("click", () => window.open(ruta.url, "_blank"));
+            }
+          });
+        });
+    });
 
 
   </script>
