@@ -20,17 +20,18 @@
     }
 	
 	
-	    .etiqueta-visible div {
+    .etiqueta-visible div {
       background: white;
       border: 2px solid #333;
       color: black;
       font-weight: bold;
-      padding: 2px 6px;
-      border-radius: 4px;
+      padding: 3px 8px;
+      border-radius: 5px;
       display: inline-block;
       white-space: nowrap;
-      box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-      font-size: 13px;
+      box-shadow: 3px 3px 10px rgba(0,0,0,0.4);
+      font-size: 14px;
+      transform: translate(-50%, -100%); /* Para centrarla sobre el punto */
     }
 
   </style>
@@ -93,58 +94,60 @@ const labels = L.tileLayer(
     ];
 
     /* =====================================
-       CARGA DE RUTAS
+       CARGA DE RUTAS (SOLUCIÓN DEFINITIVA)
        ===================================== */
     rutas.forEach(ruta => {
       const gpxLayer = new L.GPX(ruta.gpx, {
         async: true,
         polyline_options: {
           color: ruta.color,
-          weight: 4
+          weight: 6, // Un poco más grueso para tablets
+          opacity: 0.8
+        },
+        marker_options: {
+          startIconUrl: null,
+          endIconUrl: null,
+          shadowUrl: null,
+          wptIconUrls: { '': null }
         }
       });
 
-            gpxLayer.on("loaded", function(e) {
-        const gpx = e.target;
-        map.fitBounds(gpx.getBounds(), { padding: [20, 20] });
+      gpxLayer.on("loaded", function(e) {
+        map.fitBounds(e.target.getBounds(), { padding: [20, 20] });
 
-        // Usamos un pequeño retraso para asegurar que el plugin ha terminado de "limpiar" el mapa
-        setTimeout(() => {
-          const waypoints = gpx.get_waypoints();
-          
-          waypoints.forEach(wp => {
-            if (wp.name) {
-              // Creamos una etiqueta de texto real, no un tooltip
-              L.marker(wp.latlng, {
-                icon: L.divIcon({
-                  className: 'etiqueta-visible', // Tu estilo CSS
-                  html: `<div>${wp.name}</div>`,
-                  iconSize: [120, 20], // Tamaño aproximado del área del texto
-                  iconAnchor: [60, 10] // Centrado sobre el punto
-                }),
-                interactive: true // Para que se pueda clicar
-              })
-              .addTo(map)
-              .on("click", (event) => {
-                L.DomEvent.stopPropagation(event);
-                window.open(ruta.url, "_blank");
-              });
-            }
-          });
-        }, 500); // Espera medio segundo tras la carga
+        // Buscamos los marcadores que el plugin ha creado
+        e.target.eachLayer(function(layer) {
+          // Si es un marcador y tiene un título (el nombre del waypoint)
+          if (layer instanceof L.Marker && layer.options.title) {
+            
+            // CREAMOS UNA ETIQUETA REAL (No tooltip)
+            const etiquetaCustom = L.marker(layer.getLatLng(), {
+              icon: L.divIcon({
+                className: 'etiqueta-visible',
+                html: `<div>${layer.options.title}</div>`,
+                iconSize: [100, 20],
+                iconAnchor: [50, 10]
+              }),
+              interactive: true
+            });
+
+            etiquetaCustom.addTo(map);
+            
+            // Hacer que la etiqueta también lleve a YouTube
+            etiquetaCustom.on("click", () => window.open(ruta.url, "_blank"));
+            
+            // Eliminamos el marcador original "invisible" para que no moleste
+            map.removeLayer(layer);
+          }
+        });
       });
 
-
-
-  // Al hacer clic en la línea, abre YouTube
-      gpxLayer.on("click", function(e) {
-        if (e.originalEvent) e.originalEvent.stopPropagation();
-        window.open(ruta.url, "_blank");
-      });
+      // El clic en la línea sigue funcionando
+      gpxLayer.on("click", () => window.open(ruta.url, "_blank"));
 
       gpxLayer.addTo(map);
+    });
 
-    }); // <--- ESTE ES EL QUE CIERRA EL rutas.forEach(ruta => {
 
 
   </script>
