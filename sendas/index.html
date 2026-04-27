@@ -89,29 +89,46 @@ const labels = L.tileLayer(
         }
       });
 
-      gpxLayer.on("loaded", e => {
-	  const gpx = e.target;
-        map.fitBounds(e.target.getBounds(), { padding: [20, 20] });
-     
+       gpxLayer.on("loaded", function(e) {
+        const gpx = e.target;
+        map.fitBounds(gpx.getBounds(), { padding: [20, 20] });
 
-        // Buscamos los Waypoints para ponerles la etiqueta permanente
-        gpx.getLayers().forEach(layer => {
-		
-		  const nombrePunto = layer.options.name || layer.options.title;
-          if (layer instanceof L.Marker && nombrePunto) {
-            layer.bindTooltip(nombrePunto, {
+        // Extraemos los Waypoints directamente del análisis del GPX
+        const waypoints = gpx.get_waypoints();
+        
+        waypoints.forEach(wp => {
+          // wp.name es el texto que hay en <name> dentro del GPX
+          if (wp.name) {
+            console.log("Creando etiqueta para:", wp.name); // Para debug
+            
+            // Creamos un marcador invisible solo para sostener la etiqueta
+            L.marker(wp.latlng, {
+              icon: L.divIcon({
+                className: 'contenedor-invisible',
+                html: '' 
+              })
+            })
+            .bindTooltip(wp.name, {
               permanent: true,
               direction: 'top',
-              className: 'etiqueta-visible',
+              className: 'etiqueta-visible', // Tu estilo CSS
               offset: [0, -10]
-            }).addTo(map);
+            })
+            .addTo(map);
           }
         });
       });
 
-      gpxLayer.on("click", () => {
+
+  // Al hacer clic en la línea, abre YouTube
+      gpxLayer.on("click", function(e) {
+        if (e.originalEvent) e.originalEvent.stopPropagation();
         window.open(ruta.url, "_blank");
       });
+
+      gpxLayer.addTo(map);
+
+    }); // <--- ESTE ES EL QUE CIERRA EL rutas.forEach(ruta => {
 
       gpxLayer.addTo(map);
     });
