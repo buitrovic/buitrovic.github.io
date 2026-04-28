@@ -12,6 +12,18 @@
   <time>2026-04-26T21:17:22.539Z</time>
   <bounds minlat="39.859616" minlon="-0.606737" maxlat="39.903942" maxlon="-0.470095"/>
 </metadata>
+<wpt lat="39.869886" lon="-0.560077">
+  <name>S</name>
+  <desc>INICIO (Amarillo/Blanco)</desc>
+</wpt>
+
+<wpt lat="39.878496" lon="-0.556483">
+  <name>X</name>
+  <desc>FIN (Rojo/Blanco)</desc>
+</wpt>
+
+
+
 <wpt lat="39.874143" lon="-0.559487"><ele>615</ele><name>Senda lateral Albares</name><desc>Divertida</desc></wpt>
 <rte>
   <rtept lat="39.869886" lon="-0.560077"><ele>610.115</ele><time>2024-03-09T12:43:44.461Z</time></rtept>
