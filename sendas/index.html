@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Rutas GPX</title>
+
+<script src='https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.js'></script>
+  <link href='https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css' rel='stylesheet' />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/omnivore/0.3.4/leaflet-omnivore.min.js"></script>
+
+  <style>
+    #map {
+      height: 100vh;
+    }
+	
+	
+.etiqueta-visible div {
+      background: white !important;
+      border: 2px solid #333 !important;
+      color: black !important;
+      font-weight: bold !important;
+      padding: 6px 12px !important; /* Más relleno para que sea un botón grande */
+      border-radius: 8px !important;
+      display: inline-block !important;
+      white-space: nowrap !important;
+      box-shadow: 3px 3px 10px rgba(0,0,0,0.4) !important;
+      
+      /* Tamaño para PC */
+      font-size: 14px !important; 
+      
+      transform: translate(-50%, -100%);
+      position: absolute;
+    }
+
+    /* AJUSTE AUTOMÁTICO PARA MÓVILES (Smartphone) */
+    @media (max-width: 768px) {
+      .etiqueta-visible div {
+        font-size: 18px !important; /* Fuente más grande */
+        padding: 8px 16px !important; /* Más espacio para tocar con el dedo */
+        border-width: 3px !important; /* Borde más marcado */
+      }
+    }
+
+    /* Elimina las sombras y los iconos por defecto que no hayamos definido nosotros */
+    .leaflet-marker-icon[src*="marker-icon"] {
+        display: none !important;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div id="map"></div>
+
+  <script>
+    /* =====================================
+       MAPA
+       ===================================== */
+const map = new maplibregl.Map({
+        container: 'map',
+        style: {
+            "version": 8,
+            "sources": {
+                "raster-tiles": {
+                    "type": "raster",
+                    "tiles": ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"],
+                    "tileSize": 256,
+                    "attribution": "© Esri"
+                },
+                "labels": {
+                    "type": "raster",
+                    "tiles": ["https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}"],
+                    "tileSize": 256
+                },
+                "terrainSource": {
+                    "type": "raster-dem",
+                    "url": "https://demotiles.maplibre.org/terrain-tiles/tiles.json",
+                    "tileSize": 256
+                }
+            },
+            "layers": [
+                { "id": "satelite", "type": "raster", "source": "raster-tiles" },
+                { "id": "labels", "type": "raster", "source": "labels" }
+            ]
+        },
+        center: [-0.56, 39.87],
+        zoom: 13,
+        pitch: 60 // Inclinación para el 3D
+    });
+
+    map.on('load', () => {
+        map.setTerrain({ 'source': 'terrainSource', 'exaggeration': 1.5 });
+    });
+
+    /* =====================================
+       GPX + URL ASOCIADA
+       ===================================== */
+    const rutas = [
+      {
+        gpx: "1.gpx",
+        url: "https://youtu.be/B6VvOnKYdPg",
+        color: "blue"
+      },
+      {
+        gpx: "2.gpx",
+        url: "https://youtu.be/N859GPHNy0A",
+        color: "red"
+      },
+ {
+        gpx: "Senda lateral Albares.gpx",
+        url: "https://www.youtube.com/watch?v=Ay8jkCy4HZQ",
+        color: "green"
+      }
+
+      
+    ];
+
+    /* =====================================
+       CARGA DE RUTAS (SOLUCIÓN DEFINITIVA)
+       ===================================== */
+    rutas.forEach(ruta => {
+fetch(ruta.gpx)
+        .then(res => res.text())
+        .then(gpxData => {
+            const parser = new DOMParser();
+            const xml = parser.parseFromString(gpxData, "text/xml");
+            
+            // Extraer puntos para la línea
+            const coords = Array.from(xml.querySelectorAll('rtept')).map(p => [
+                parseFloat(p.getAttribute('lon')), 
+                parseFloat(p.getAttribute('lat'))
+            ]);
+
+            // Añadir la línea al mapa 3D
+            map.addLayer({
+                'id': 'route-' + ruta.gpx,
+                'type': 'line',
+                'source': {
+                    'type': 'geojson',
+                    'data': {
+                        'type': 'Feature',
+                        'geometry': { 'type': 'LineString', 'coordinates': coords }
+                    }
+                },
+                'layout': { 'line-join': 'round', 'line-cap': 'round' },
+                'paint': { 'line-color': ruta.color, 'line-width': 5 }
+            });
+
+            // Añadir los Marcadores (S y X)
+            const wpts = xml.querySelectorAll("wpt");
+            wpts.forEach(wpt => {
+                const lon = parseFloat(wpt.getAttribute("lon"));
+                const lat = parseFloat(wpt.getAttribute("lat"));
+                const name = wpt.querySelector("name").textContent;
+
+                const el = document.createElement('div');
+                el.className = 'etiqueta-visible';
+                el.innerHTML = `<div style="color:${name === 'S' ? 'yellow' : 'red'}">${name}</div>`;
+
+                new maplibregl.Marker(el)
+                    .setLngLat([lon, lat])
+                    .addTo(map);
+            });
+        });
+    });
+
+
+  </script>
+
+</body>
+</html>
