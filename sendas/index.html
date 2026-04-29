@@ -2,6 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  
   <title>Rutas GPX</title>
 
   <!-- Leaflet -->
@@ -41,10 +43,10 @@
     /* AJUSTE AUTOMÁTICO PARA MÓVILES (Smartphone) */
    @media (max-width: 768px) {
       .etiqueta-visible div {
-        font-size: 200px !important;    /* Texto mucho más grande */
-        padding: 200px 150px !important;  /* Más espacio interior */
-        border-width: 8px !important;   /* Borde más grueso */
-        border-radius: 24px !important; /* Esquinas más redondeadas */
+        font-size: 24px !important;    /* Texto mucho más grande */
+        padding: 12px 20px !important;  /* Más espacio interior */
+        border-width: 4px !important;   /* Borde más grueso */
+        border-radius: 12px !important; /* Esquinas más redondeadas */
       }
     }
 
@@ -78,11 +80,32 @@
 	/* AJUSTE PARA MÓVILES: Botón de info más grande */
     @media (max-width: 768px) {
       .info-button {
-        width: 280px;         /* Más grande para el dedo */
-        height: 280px;
-        line-height: 240px;
-        font-size: 180px;     /* Letra "i" más grande */
-        border-width: 8px;
+        width: 70px;         /* Más grande para el dedo */
+        height: 70px;
+        line-height: 65px;
+        font-size: 45px;     /* Letra "i" más grande */
+        border-width: 4px;
+      }
+    }
+	
+	/* AJUSTE ESPECÍFICO PARA MÓVILES EN VERTICAL */
+    @media (max-width: 480px) {
+      .info-button {
+        width: 80px !important;    /* Un poco más grande aún */
+        height: 80px !important;
+        line-height: 75px !important;
+        font-size: 50px !important;
+      }
+
+      .etiqueta-visible div {
+        font-size: 28px !important; /* Letras S y X bien grandes */
+        padding: 15px 25px !important;
+      }
+
+      .modal-content {
+        width: 85% !important;
+        font-size: 26px !important; /* Texto "En pruebas" más legible */
+        margin-top: 30% !important; /* Bajamos la ventana para que no estorbe arriba */
       }
     }
 
@@ -115,10 +138,10 @@
 	@media (max-width: 768px) {
       .modal-content {
         width: 90%;        /* Que ocupe casi toda la anchura */
-        font-size: 100px;   /* Texto más grande dentro del modal */
+        font-size: 22px;   /* Texto más grande dentro del modal */
       }
       .close-modal {
-        font-size: 80px;   /* Aspa de cerrar más grande */
+        font-size: 40px;   /* Aspa de cerrar más grande */
       }
     }
 
