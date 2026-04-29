@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx creator="WTracks"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" version="1.1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata>
+  <name>Wikiloc - 2025-Jérica Nº3-2) Rodadora a la Muela. Sentido antihorario. Mucha pista+ctto Losa+senda escalones+senda lateral Albares.</name>
+  <desc></desc>
+  <author><name>WTracks</name></author>
+  <link href='https://opoto.github.io/wtracks/'>
+    <text>WTracks</text>
+    <type>text/html</type>
+  </link>
+  <time>2026-04-29T14:48:44.721Z</time>
+  <bounds minlat="39.8865" minlon="-0.613582" maxlat="39.892041" maxlon="-0.596502"/>
+</metadata>
+<wpt lat="39.889292" lon="-0.607263"><ele>581</ele><name>Circuito la Losa</name></wpt>
+<trk>
+  <trkseg>
+    <trkpt lat="39.889999" lon="-0.602993"><ele>573</ele><time>2024-08-02T07:37:43.124Z</time></trkpt>
+    <trkpt lat="39.890074" lon="-0.604879"><ele>567.395</ele><time>2024-08-02T07:38:48.114Z</time></trkpt>
+    <trkpt lat="39.889648" lon="-0.6051"><ele>569.149</ele><time>2024-08-02T07:39:46.114Z</time></trkpt>
+    <trkpt lat="39.889502" lon="-0.605637"><ele>568.823</ele><time>2024-08-02T07:40:07.115Z</time></trkpt>
+    <trkpt lat="39.88961" lon="-0.605993"><ele>569.809</ele><time>2024-08-02T07:40:25.125Z</time></trkpt>
+    <trkpt lat="39.889151" lon="-0.606142"><ele>568.351</ele><time>2024-08-02T07:40:42.119Z</time></trkpt>
+    <trkpt lat="39.889213" lon="-0.606315"><ele>569.62</ele><time>2024-08-02T07:40:48.113Z</time></trkpt>
+    <trkpt lat="39.889661" lon="-0.606426"><ele>572.884</ele><time>2024-08-02T07:41:02.131Z</time></trkpt>
+    <trkpt lat="39.889692" lon="-0.606727"><ele>574.399</ele><time>2024-08-02T07:41:13.120Z</time></trkpt>
+    <trkpt lat="39.88943" lon="-0.606493"><ele>572.473</ele><time>2024-08-02T07:41:25.125Z</time></trkpt>
+    <trkpt lat="39.889087" lon="-0.606501"><ele>571.132</ele><time>2024-08-02T07:41:35.115Z</time></trkpt>
+    <trkpt lat="39.889442" lon="-0.606583"><ele>573.875</ele><time>2024-08-02T07:41:49.120Z</time></trkpt>
+    <trkpt lat="39.88949" lon="-0.606709"><ele>575.013</ele><time>2024-08-02T07:41:54.112Z</time></trkpt>
+    <trkpt lat="39.888988" lon="-0.606793"><ele>573.764</ele><time>2024-08-02T07:42:09.117Z</time></trkpt>
+    <trkpt lat="39.889024" lon="-0.606998"><ele>575.912</ele><time>2024-08-02T07:42:18.107Z</time></trkpt>
+    <trkpt lat="39.888854" lon="-0.607127"><ele>575.632</ele><time>2024-08-02T07:42:25.121Z</time></trkpt>
+    <trkpt lat="39.888152" lon="-0.607134"><ele>576.105</ele><time>2024-08-02T07:42:51.115Z</time></trkpt>
+    <trkpt lat="39.887679" lon="-0.607447"><ele>578.609</ele><time>2024-08-02T07:43:13.113Z</time></trkpt>
+    <trkpt lat="39.88777" lon="-0.607691"><ele>580.413</ele><time>2024-08-02T07:43:21.122Z</time></trkpt>
+    <trkpt lat="39.887947" lon="-0.607749"><ele>580.272</ele><time>2024-08-02T07:43:27.130Z</time></trkpt>
+    <trkpt lat="39.88846" lon="-0.607594"><ele>577.966</ele><time>2024-08-02T07:43:38.119Z</time></trkpt>
+    <trkpt lat="39.887841" lon="-0.60762"><ele>579.651</ele><time>2024-08-02T07:44:00.114Z</time></trkpt>
+    <trkpt lat="39.888022" lon="-0.607367"><ele>577.165</ele><time>2024-08-02T07:44:09.123Z</time></trkpt>
+    <trkpt lat="39.888647" lon="-0.60727"><ele>576.214</ele><time>2024-08-02T07:44:25.119Z</time></trkpt>
+    <trkpt lat="39.889059" lon="-0.607441"><ele>579.997</ele><time>2024-08-02T07:44:34.120Z</time></trkpt>
+    <trkpt lat="39.889426" lon="-0.60738"><ele>579.865</ele><time>2024-08-02T07:44:44.126Z</time></trkpt>
+    <trkpt lat="39.88919" lon="-0.607217"><ele>578.956</ele><time>2024-08-02T07:44:57.122Z</time></trkpt>
+    <trkpt lat="39.889581" lon="-0.60723"><ele>577.197</ele><time>2024-08-02T07:45:07.118Z</time></trkpt>
+    <trkpt lat="39.889667" lon="-0.607075"><ele>575.823</ele><time>2024-08-02T07:45:13.116Z</time></trkpt>
+    <trkpt lat="39.889162" lon="-0.607082"><ele>577.525</ele><time>2024-08-02T07:45:24.120Z</time></trkpt>
+    <trkpt lat="39.889145" lon="-0.606925"><ele>575.709</ele><time>2024-08-02T07:45:28.109Z</time></trkpt>
+    <trkpt lat="39.889686" lon="-0.606971"><ele>575.231</ele><time>2024-08-02T07:45:40.132Z</time></trkpt>
+    <trkpt lat="39.889976" lon="-0.606832"><ele>573.12</ele><time>2024-08-02T07:45:49.114Z</time></trkpt>
+    <trkpt lat="39.890105" lon="-0.606584"><ele>572.234</ele><time>2024-08-02T07:45:57.123Z</time></trkpt>
+    <trkpt lat="39.890045" lon="-0.606034"><ele>569.499</ele><time>2024-08-02T07:46:17.130Z</time></trkpt>
+    <trkpt lat="39.889519" lon="-0.605609"><ele>568.933</ele><time>2024-08-02T07:47:09.121Z</time></trkpt>
+    <trkpt lat="39.889698" lon="-0.605058"><ele>568.442</ele><time>2024-08-02T07:47:20.114Z</time></trkpt>
+    <trkpt lat="39.890093" lon="-0.604821"><ele>567.375</ele><time>2024-08-02T07:47:37.107Z</time></trkpt>
+    <trkpt lat="39.89013" lon="-0.603883"><ele>566</ele><time>2024-08-02T07:48:03.116Z</time></trkpt>
+  </trkseg>
+</trk></gpx>

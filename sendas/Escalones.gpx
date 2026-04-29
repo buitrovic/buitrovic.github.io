@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx creator="WTracks"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" version="1.1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata>
+  <name>Wikiloc - 2025-Jérica Nº3-2) Rodadora a la Muela. Sentido antihorario. Mucha pista+ctto Losa+senda escalones+senda lateral Albares.</name>
+  <desc></desc>
+  <author><name>WTracks</name></author>
+  <link href='https://opoto.github.io/wtracks/'>
+    <text>WTracks</text>
+    <type>text/html</type>
+  </link>
+  <time>2026-04-29T14:50:50.265Z</time>
+  <bounds minlat="39.861987" minlon="-0.572169" maxlat="39.873071" maxlon="-0.538008"/>
+</metadata>
+<wpt lat="39.86716" lon="-0.556526"><ele>640</ele><name>Escalones</name></wpt>
+<trk>
+  <trkseg>
+    <trkpt lat="39.865486" lon="-0.552642"><ele>657.314</ele><time>2026-04-29T15:26:40.380380227Z</time></trkpt>
+    <trkpt lat="39.865519" lon="-0.552589"><ele>657.109</ele><time>2026-04-29T15:26:50.380382912Z</time></trkpt>
+    <trkpt lat="39.86575" lon="-0.552932"><ele>657.576</ele><time>2026-04-29T15:27:00.380385637Z</time></trkpt>
+    <trkpt lat="39.865857" lon="-0.553254"><ele>656.915</ele><time>2026-04-29T15:27:10.380388322Z</time></trkpt>
+    <trkpt lat="39.865923" lon="-0.553586"><ele>654.279</ele><time>2026-04-29T15:27:20.380391068Z</time></trkpt>
+    <trkpt lat="39.866195" lon="-0.553747"><ele>651.384</ele><time>2026-04-29T15:27:30.380393723Z</time></trkpt>
+    <trkpt lat="39.866491" lon="-0.55408"><ele>649.888</ele><time>2026-04-29T15:27:40.380396398Z</time></trkpt>
+    <trkpt lat="39.866615" lon="-0.554488"><ele>649.497</ele><time>2026-04-29T15:27:50.380399093Z</time></trkpt>
+    <trkpt lat="39.866681" lon="-0.554981"><ele>647.44</ele><time>2026-04-29T15:28:00.380401808Z</time></trkpt>
+    <trkpt lat="39.866804" lon="-0.555292"><ele>648.428</ele><time>2026-04-29T15:28:10.380404483Z</time></trkpt>
+    <trkpt lat="39.866895" lon="-0.555582"><ele>647.219</ele><time>2026-04-29T15:28:20.380407158Z</time></trkpt>
+    <trkpt lat="39.866928" lon="-0.555904"><ele>644.179</ele><time>2026-04-29T15:28:30.380409903Z</time></trkpt>
+    <trkpt lat="39.866936" lon="-0.556322"><ele>641.905</ele><time>2026-04-29T15:28:40.380412598Z</time></trkpt>
+    <trkpt lat="39.867051" lon="-0.556591"><ele>642.125</ele><time>2026-04-29T15:28:50.380415303Z</time></trkpt>
+    <trkpt lat="39.867373" lon="-0.556955"><ele>640.409</ele><time>2026-04-29T15:29:00.380418048Z</time></trkpt>
+    <trkpt lat="39.867422" lon="-0.55717"><ele>639.869</ele><time>2026-04-29T15:29:10.380420743Z</time></trkpt>
+    <trkpt lat="39.86734" lon="-0.557266"><ele>640.618</ele><time>2026-04-29T15:29:20.380423438Z</time></trkpt>
+    <trkpt lat="39.867414" lon="-0.557342"><ele>639.542</ele><time>2026-04-29T15:29:30.380426113Z</time></trkpt>
+    <trkpt lat="39.867546" lon="-0.557374"><ele>638.097</ele><time>2026-04-29T15:29:40.380428808Z</time></trkpt>
+    <trkpt lat="39.867702" lon="-0.557288"><ele>637.171</ele><time>2026-04-29T15:29:50.380431463Z</time></trkpt>
+    <trkpt lat="39.867784" lon="-0.55761"><ele>634.24</ele><time>2026-04-29T15:30:00.380434178Z</time></trkpt>
+    <trkpt lat="39.867826" lon="-0.557792"><ele>632.233</ele><time>2026-04-29T15:30:10.380436893Z</time></trkpt>
+    <trkpt lat="39.867817" lon="-0.558017"><ele>628.351</ele><time>2026-04-29T15:30:20.380439568Z</time></trkpt>
+    <trkpt lat="39.867653" lon="-0.558125"><ele>628.162</ele><time>2026-04-29T15:30:30.380442293Z</time></trkpt>
+    <trkpt lat="39.867776" lon="-0.558221"><ele>625.076</ele><time>2026-04-29T15:30:40.380445149Z</time></trkpt>
+    <trkpt lat="39.867924" lon="-0.558146"><ele>625.09</ele><time>2026-04-29T15:30:50.380447984Z</time></trkpt>
+    <trkpt lat="39.86813" lon="-0.557985"><ele>625.819</ele><time>2026-04-29T15:31:00.380450689Z</time></trkpt>
+    <trkpt lat="39.868279" lon="-0.557739"><ele>629.909</ele><time>2026-04-29T15:31:10.380453394Z</time></trkpt>
+    <trkpt lat="39.868567" lon="-0.557545"><ele>630.799</ele><time>2026-04-29T15:31:20.380456079Z</time></trkpt>
+    <trkpt lat="39.868806" lon="-0.557374"><ele>628.988</ele><time>2026-04-29T15:31:30.380458754Z</time></trkpt>
+    <trkpt lat="39.868962" lon="-0.557374"><ele>625.862</ele><time>2026-04-29T15:31:40.380461439Z</time></trkpt>
+    <trkpt lat="39.869078" lon="-0.557503"><ele>621.967</ele><time>2026-04-29T15:31:50.380464154Z</time></trkpt>
+    <trkpt lat="39.869102" lon="-0.557857"><ele>618.891</ele><time>2026-04-29T15:32:00.380466789Z</time></trkpt>
+    <trkpt lat="39.869218" lon="-0.558178"><ele>615.25</ele><time>2026-04-29T15:32:10.380469474Z</time></trkpt>
+    <trkpt lat="39.869283" lon="-0.558339"><ele>614.423</ele><time>2026-04-29T15:32:20.380472149Z</time></trkpt>
+    <trkpt lat="39.869358" lon="-0.558554"><ele>614.181</ele><time>2026-04-29T15:32:30.380482729Z</time></trkpt>
+    <trkpt lat="39.869572" lon="-0.558811"><ele>614.482</ele><time>2026-04-29T15:32:40.380485434Z</time></trkpt>
+    <trkpt lat="39.869835" lon="-0.559198"><ele>614.099</ele><time>2026-04-29T15:32:50.380488229Z</time></trkpt>
+  </trkseg>
+</trk></gpx>
