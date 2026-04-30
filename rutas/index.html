@@ -88,6 +88,57 @@
       }
     }
 	
+	
+	/* Botón del Menú de Rutas */
+    .menu-button {
+      background: white;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 30px;
+      border: 2px solid rgba(0,0,0,0.2);
+      box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+    }
+
+    /* Panel desplegable de grupos */
+    .menu-panel {
+      display: none; /* Oculto por defecto */
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+      border: 2px solid rgba(0,0,0,0.2);
+      box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+      margin-top: 5px;
+    }
+
+    .menu-item {
+      display: block;
+      padding: 10px;
+      margin: 5px 0;
+      background: #f0f0f0;
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      border-radius: 4px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .menu-item:hover { background: #e0e0e0; }
+
+    /* Ajuste para móviles */
+    @media (max-width: 768px) {
+      .menu-button { width: 70px; height: 70px; line-height: 70px; font-size: 40px; }
+      .menu-item { font-size: 22px; padding: 15px; }
+    }
+	
+	
+	
+	
+	
 	/* AJUSTE ESPECÍFICO PARA MÓVILES EN VERTICAL */
     @media (max-width: 480px) {
       .info-button {
@@ -184,6 +235,64 @@
     function cerrarModal() {
       document.getElementById("miModal").style.display = "none";
     }
+	
+	
+	/* =====================================
+       LÓGICA DEL MENÚ DE GRUPOS
+       ===================================== */
+
+    // 1. Función para limpiar el mapa y cargar un grupo nuevo
+    function cargarGrupo(nombreGrupo) {
+      // Borramos lo que haya ahora en el mapa
+      capasActivas.forEach(capa => map.removeLayer(capa));
+      capasActivas = [];
+
+      // Cargamos las rutas del grupo elegido
+      grupos[nombreGrupo].forEach(ruta => {
+        const gpxLayer = new L.GPX(ruta.gpx, {
+          async: true,
+          polyline_options: { color: ruta.color, weight: 6, opacity: 0.8 },
+          marker_options: { startIconUrl: null, endIconUrl: null, shadowUrl: null }
+        }).addTo(map);
+
+        // Guardamos la capa para poder borrarla luego
+        capasActivas.push(gpxLayer);
+
+        gpxLayer.on("loaded", e => {
+          if (ruta === grupos[nombreGrupo][0]) map.fitBounds(e.target.getBounds());
+        });
+      });
+      
+      // Cerramos el menú al elegir
+      document.getElementById("menuPanel").style.display = "none";
+    }
+
+    // 2. Crear el botón del Menú en el mapa
+    const menuControl = L.control({ position: 'topright' });
+
+    menuControl.onAdd = function() {
+      const contenedor = L.DomUtil.create('div', 'menu-contenedor');
+      contenedor.innerHTML = `
+        <div id="btnMenu" class="menu-button">≡</div>
+        <div id="menuPanel" class="menu-panel">
+          <div class="menu-item" onclick="cargarGrupo('Grupo 1')">Grupo 1</div>
+          <div class="menu-item" onclick="cargarGrupo('Grupo 2')">Grupo 2</div>
+        </div>
+      `;
+      
+      // Evita que al tocar el menú se mueva el mapa de fondo
+      L.DomEvent.disableClickPropagation(contenedor);
+
+      // Abrir/Cerrar panel
+      contenedor.querySelector('#btnMenu').onclick = function() {
+        const panel = contenedor.querySelector('#menuPanel');
+        panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
+      };
+      
+      return contenedor;
+    };
+
+    menuControl.addTo(map);
 
     // Cerrar si se hace click fuera de la cajita blanca
     window.onclick = function(event) {
@@ -217,25 +326,21 @@ const labels = L.tileLayer(
     /* =====================================
        GPX + URL ASOCIADA
        ===================================== */
-    const rutas = [
-      {
-        gpx: "Escalones.gpx",
-        url: "https://youtu.be/B6VvOnKYdPg",
-        color: "blue"
-      },
-      {
-        gpx: "lalosa.gpx",
-        url: "https://youtu.be/k6EZKbL6XtI",
-        color: "red"
-      },
- {
-        gpx: "Senda lateral Albares.gpx",
-        url: "https://www.youtube.com/watch?v=Ay8jkCy4HZQ",
-        color: "green"
-      }
+    const grupos = {
+      "Grupo 1": [
+        { gpx: "Tecnicamuela.gpx", url: "https://youtu.be/B6VvOnKYdPg", color: "blue" },
+        { gpx: "rodadoramuela.gpx", url: "https://youtu.be/N859GPHNy0A", color: "red" },
+        { gpx: "Muelarivas.gpx", url: "https://ejemplo.com", color: "orange" }
+      ],
+      "Grupo 2": [
+        { gpx: "Caudielnovaliches.gpx", url: "https://www.youtube.com/watch?v=Ay8jkCy4HZQ", color: "green" },
+        { gpx: "molineras.gpx", url: "https://ejemplo.com", color: "purple" },
+        { gpx: "penyaaguilasuperior.gpx", url: "https://ejemplo.com", color: "black" }
+      ]
+    };
 
-      
-    ];
+    // Variable para guardar las capas activas y poder borrarlas al cambiar de grupo
+    let capasActivas = [];
 
     /* =====================================
        CARGA DE RUTAS (SOLUCIÓN DEFINITIVA)
