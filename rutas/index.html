@@ -167,12 +167,19 @@
       capasActivas.forEach(capa => map.removeLayer(capa));
       capasActivas = [];
 
-      // Cargar nuevas rutas
+     // Cargar nuevas rutas
       grupos[nombreGrupo].forEach(ruta => {
         const gpxLayer = new L.GPX(ruta.gpx, {
           async: true,
           polyline_options: { color: ruta.color, weight: 6, opacity: 0.8 },
-          marker_options: { startIconUrl: null, endIconUrl: null, shadowUrl: null }
+          marker_options: { 
+            startIconUrl: null, 
+            endIconUrl: null, 
+            shadowUrl: null,
+            // ESTA LÍNEA ES LA QUIRÚRGICA:
+            // Elimina cualquier icono de waypoint que el plugin intente poner por defecto
+            wptIconUrls: { '': null } 
+          }
         }).addTo(map);
 
         // --- CORRECCIÓN 1: Click en la línea de la ruta ---
@@ -185,24 +192,32 @@
         });
 
         // Cargar S y X
+// 3. Carga de Waypoints (Todos menos Inicio/Fin)
         fetch(ruta.gpx)
           .then(res => res.text())
           .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
           .then(data => {
-            data.querySelectorAll("wpt").forEach(wpt => {
+            const wpts = data.querySelectorAll("wpt");
+            wpts.forEach(wpt => {
+              const lat = wpt.getAttribute("lat");
+              const lon = wpt.getAttribute("lon");
               const name = wpt.querySelector("name") ? wpt.querySelector("name").textContent : null;
-              if (name === "S" || name === "X") {
-                const marcador = L.marker([wpt.getAttribute("lat"), wpt.getAttribute("lon")], {
+
+              // --- FILTRO QUIRÚRGICO ---
+              // Definimos qué nombres queremos ignorar (puedes añadir más a la lista)
+              const nombresProhibidos = ["Inicio", "Fin", "Start", "End", "inicio", "fin"];
+              
+              if (name && lat && lon && !nombresProhibidos.includes(name)) {
+                const marcador = L.marker([lat, lon], {
                   icon: L.divIcon({
                     className: 'etiqueta-visible',
-                    html: `<div style="color:${name === 'S' ? 'yellow' : 'red'}">${name}</div>`,
+                    // Si el nombre es S o X le damos color, si no, texto normal
+                    html: `<div style="color:${name === 'S' ? '#FFD700' : (name === 'X' ? 'red' : 'black')} !important;">${name}</div>`,
                     iconSize: [0, 0]
                   })
                 }).addTo(map);
 
-                // --- CORRECCIÓN 2: Click en la etiqueta S o X ---
                 marcador.on("click", () => window.open(ruta.url, "_blank"));
-
                 capasActivas.push(marcador);
               }
             });
