@@ -262,10 +262,16 @@ main {
 
 
 <nav id="mobile-menu">
-  <a href="Sendas/index.html">Sendas</a>
-  <a class="Rutas/index.html">Rutas circulares</a>
+  <!-- 1. Corregido a minúscula para que coincida con la carpeta -->
+  <a href="sendas/index.html">Sendas</a>
+  
+  <!-- 2. Corregido 'class' por 'href' y puesto en minúscula -->
+  <a href="rutas/index.html">Rutas circulares</a>
+  
   <a class="disabled">Deshabilitado</a>
-  <a href="#">Información</a>
+  
+  <!-- 3. Añadido cierre del menú al pulsar en Información o cerrar -->
+  <a href="#" onclick="document.getElementById('mobile-menu').classList.remove('open')">Cerrar Menú</a>
 </nav>
 
 
