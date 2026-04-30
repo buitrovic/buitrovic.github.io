@@ -201,7 +201,7 @@ let rutaSeleccionada = null;
             capasActivas.forEach(c => {
               // Si es una LÍNEA
               if (c.setStyle) { 
-                c === gpxLayer ? c.setStyle({weight: 12, opacity: 1}) : c.setStyle({weight: 4, opacity: 0.2});
+                c === gpxLayer ? c.setStyle({weight: 8, opacity: 1}) : c.setStyle({weight: 4, opacity: 0.2});
               }
               // Si es una ETIQUETA (Marcador)
               if (c instanceof L.Marker) {
