@@ -10,9 +10,12 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <!-- Leaflet GPX plugin -->
+  <!-- librería de flechas -->
   <script src="https://unpkg.com/leaflet-gpx/gpx.js"></script>
 
+  <!-- Leaflet GPX plugin -->
+<script src="https://cdn.jsdelivr.net/npm/leaflet-polyline-decorator@1.6.0/dist/leaflet.polylineDecorator.js"></script>
+  
   <style>
     #map { 
   width: 100%;
@@ -175,21 +178,19 @@
 
    /* 3. FUNCIONES PRINCIPALES */
 let rutaSeleccionada = null; 
+    let decoradorFlechas = null; // Para guardar las flechas y poder quitarlas
 
     function cargarGrupo(nombreGrupo) {
+      // 1. Limpiar todo
       capasActivas.forEach(capa => map.removeLayer(capa));
+      if (decoradorFlechas) map.removeLayer(decoradorFlechas);
       capasActivas = [];
       rutaSeleccionada = null;
 
       grupos[nombreGrupo].forEach(ruta => {
         const gpxLayer = new L.GPX(ruta.gpx, {
           async: true,
-          polyline_options: { 
-            color: ruta.color, 
-            weight: 6, 
-            opacity: 0.8,
-            lineCap: 'round' 
-          },
+          polyline_options: { color: ruta.color, weight: 6, opacity: 0.8 },
           marker_options: { startIconUrl: null, endIconUrl: null, shadowUrl: null, wptIconUrls: { '': null } }
         }).addTo(map);
 
@@ -201,20 +202,27 @@ let rutaSeleccionada = null;
           } else {
             rutaSeleccionada = gpxLayer;
             
+            // Borrar flechas anteriores si las hubiera
+            if (decoradorFlechas) map.removeLayer(decoradorFlechas);
+
+            // CREAR FLECHAS NUEVAS
+            decoradorFlechas = L.polylineDecorator(gpxLayer, {
+              patterns: [
+                { 
+                  offset: '5%', 
+                  repeat: '60px', // Distancia entre flechas
+                  symbol: L.Symbol.arrowHead({
+                    pixelSize: 10, 
+                    polygon: true, 
+                    pathOptions: { stroke: false, fillOpacity: 1, color: 'white' } 
+                  }) 
+                }
+              ]
+            }).addTo(map);
+
             capasActivas.forEach(c => {
               if (c.setStyle) { 
-                if (c === gpxLayer) {
-                  // RUTA SELECCIONADA: 
-                  // Usamos un dashArray que parece una flecha (línea larga, hueco corto)
-                  c.setStyle({
-                    weight: 12, 
-                    opacity: 1, 
-                    dashArray: "20, 10" // Esto crea el efecto de segmentos
-                  }); 
-                } else {
-                  // RUTAS NO SELECCIONADAS
-                  c.setStyle({weight: 4, opacity: 0.2, dashArray: null}); 
-                }
+                c === gpxLayer ? c.setStyle({weight: 12, opacity: 1}) : c.setStyle({weight: 4, opacity: 0.2});
               }
               if (c instanceof L.Marker) {
                 c.getElement().style.opacity = (c.options.rutaAsociada === gpxLayer) ? "1" : "0.1";
@@ -226,6 +234,7 @@ let rutaSeleccionada = null;
         gpxLayer.on("click", (e) => { L.DomEvent.stopPropagation(e); manejarAccion(); });
         gpxLayer.on("loaded", e => { if (ruta === grupos[nombreGrupo][0]) map.fitBounds(e.target.getBounds()); });
 
+        // Corregido el color de las etiquetas
         fetch(ruta.gpx).then(res => res.text()).then(str => {
           const data = new window.DOMParser().parseFromString(str, "text/xml");
           data.querySelectorAll("wpt").forEach(wpt => {
@@ -236,7 +245,7 @@ let rutaSeleccionada = null;
                 rutaAsociada: gpxLayer, 
                 icon: L.divIcon({
                   className: 'etiqueta-visible',
-                  html: `<div style="color:${name === 'S' ? '#FFD700' : 'red'} !important;">${name}</div>`,
+                  html: `<div>${name}</div>`, // Quitamos el estilo inline que daba problemas
                   iconSize: [0, 0]
                 })
               }).addTo(map);
@@ -246,14 +255,15 @@ let rutaSeleccionada = null;
           });
         });
       });
-
       if(document.getElementById("menuPanel")) document.getElementById("menuPanel").style.display = "none";
     }
 
-  map.on("click", () => {
+    // RESET: Al tocar el mapa
+    map.on("click", () => {
       rutaSeleccionada = null;
+      if (decoradorFlechas) map.removeLayer(decoradorFlechas);
       capasActivas.forEach(c => { 
-        if (c.setStyle) c.setStyle({weight: 6, opacity: 0.8, dashArray: null}); 
+        if (c.setStyle) c.setStyle({weight: 6, opacity: 0.8}); 
         if (c instanceof L.Marker && c.getElement()) c.getElement().style.opacity = "1";
       });
     });
