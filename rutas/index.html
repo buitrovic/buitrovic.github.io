@@ -14,7 +14,11 @@
   <script src="https://unpkg.com/leaflet-gpx/gpx.js"></script>
 
   <style>
-    #map { height: 100vh; }
+    #map { 
+  width: 100%;
+  height: 100vh; 
+  display: block;
+}
     
     .etiqueta-visible div {
       background: white !important;
@@ -237,8 +241,14 @@
       if (event.target == document.getElementById("miModal")) cerrarModal();
     }
 
-    // CARGA INICIAL
-    cargarGrupo('Rodeando la Muela');
+   // SUSTITUYE TU CARGA INICIAL POR ESTA:
+    window.onload = function() {
+        // Pequeño retraso de seguridad para asegurar que el div #map existe
+        setTimeout(function() {
+            map.invalidateSize(); // Fuerza al mapa a recalcular su tamaño
+            cargarGrupo('Rodeando la Muela');
+        }, 100);
+    };
   </script>
 </body>
 </html>
