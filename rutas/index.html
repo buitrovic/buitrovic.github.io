@@ -184,7 +184,12 @@ let rutaSeleccionada = null;
       grupos[nombreGrupo].forEach(ruta => {
         const gpxLayer = new L.GPX(ruta.gpx, {
           async: true,
-          polyline_options: { color: ruta.color, weight: 6, opacity: 0.8 },
+          polyline_options: { 
+            color: ruta.color, 
+            weight: 6, 
+            opacity: 0.8,
+            lineCap: 'round' 
+          },
           marker_options: { startIconUrl: null, endIconUrl: null, shadowUrl: null, wptIconUrls: { '': null } }
         }).addTo(map);
 
@@ -200,11 +205,14 @@ let rutaSeleccionada = null;
               if (c.setStyle) { 
                 if (c === gpxLayer) {
                   // RUTA SELECCIONADA: 
-                  // dashArray: "10, 15" crea una línea de guiones que indica dirección
-                  c.setStyle({weight: 12, opacity: 1, dashArray: "10, 15"}); 
+                  // Usamos un dashArray que parece una flecha (línea larga, hueco corto)
+                  c.setStyle({
+                    weight: 12, 
+                    opacity: 1, 
+                    dashArray: "20, 10" // Esto crea el efecto de segmentos
+                  }); 
                 } else {
-                  // RUTAS NO SELECCIONADAS: 
-                  // Volvemos a línea sólida y fina
+                  // RUTAS NO SELECCIONADAS
                   c.setStyle({weight: 4, opacity: 0.2, dashArray: null}); 
                 }
               }
@@ -228,7 +236,7 @@ let rutaSeleccionada = null;
                 rutaAsociada: gpxLayer, 
                 icon: L.divIcon({
                   className: 'etiqueta-visible',
-                  html: `<div style="color:${name === 'S' ? '#FFD700' : (name === 'X' ? 'red' : 'black')} !important;">${name}</div>`,
+                  html: `<div style="color:${name === 'S' ? '#FFD700' : 'red'} !important;">${name}</div>`,
                   iconSize: [0, 0]
                 })
               }).addTo(map);
@@ -242,8 +250,7 @@ let rutaSeleccionada = null;
       if(document.getElementById("menuPanel")) document.getElementById("menuPanel").style.display = "none";
     }
 
-    // RESET: Importante añadir dashArray: null para que vuelvan a ser sólidas
-    map.on("click", () => {
+  map.on("click", () => {
       rutaSeleccionada = null;
       capasActivas.forEach(c => { 
         if (c.setStyle) c.setStyle({weight: 6, opacity: 0.8, dashArray: null}); 
