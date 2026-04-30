@@ -17,7 +17,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 
   <!-- 4. Librería de flechas -->
-  <script src="https://cdn.jsdelivr.net/npm/leaflet-polyline-decorator@1.6.0/dist/leaflet.polylineDecorator.js"></script>
+  <script src="https://unpkg.com/leaflet-polyline-decorator@1.6.0/dist/leaflet.polylineDecorator.js"></script>
   
   <style>
     #map { 
@@ -206,8 +206,7 @@ let rutaSeleccionada = null;
         capasActivas.push(gpxLayer);
 
         // Función interna para aplicar el resaltado
-        const resaltarRuta = (capaDestacada) => {
-          // Si ya estaba seleccionada, abrimos enlace
+       const resaltarRuta = (capaDestacada) => {
           if (rutaSeleccionada === capaDestacada) {
             window.open(ruta.url, "_blank");
             return;
@@ -215,33 +214,44 @@ let rutaSeleccionada = null;
 
           rutaSeleccionada = capaDestacada;
 
-          // Dibujar flechas
+          // Intentar poner flechas
           if (decoradorFlechas) map.removeLayer(decoradorFlechas);
-        // DIBUJAR FLECHAS (Solo si la librería cargó)
-  if (typeof L.polylineDecorator === 'function') {
-    decoradorFlechas = L.polylineDecorator(capaDestacada, {
-      patterns: [{
-        offset: '10%', repeat: '80px',
-        symbol: L.Symbol.arrowHead({
-          pixelSize: 12, polygon: true,
-          pathOptions: { stroke: false, fillOpacity: 1, color: 'white' }
-        })
-      }]
-    }).addTo(map);
-  }
+          
+          try {
+            // Verificamos si la librería existe realmente antes de usarla
+            if (window.L && L.polylineDecorator) {
+              decoradorFlechas = L.polylineDecorator(capaDestacada, {
+                patterns: [{
+                  offset: '10%', 
+                  repeat: '100px',
+                  symbol: L.Symbol.arrowHead({
+                    pixelSize: 12, 
+                    pathOptions: { fillOpacity: 1, color: 'white', stroke: false }
+                  })
+                }]
+              }).addTo(map);
+            }
+          } catch (e) {
+            console.log("Las flechas no se pudieron cargar, pero seguimos...");
+          }
 
-  // Resaltar línea
-  capasActivas.forEach(c => {
-    if (c.setStyle) {
-      c === capaDestacada ? c.setStyle({ weight: 12, opacity: 1 }) : c.setStyle({ weight: 4, opacity: 0.2 });
-      if (c === capaDestacada) c.bringToFront();
-    }
-    if (c instanceof L.Marker) {
-      c.setOpacity(c.options.rutaAsociada === capaDestacada ? 1 : 0.1);
-    }
-  });
-  if (decoradorFlechas) decoradorFlechas.bringToFront();
-};
+          // Resaltado visual de las líneas (esto NO fallará)
+          capasActivas.forEach(c => {
+            if (c.setStyle) {
+              if (c === capaDestacada) {
+                c.setStyle({ weight: 12, opacity: 1 });
+                c.bringToFront();
+              } else {
+                c.setStyle({ weight: 4, opacity: 0.2 });
+              }
+            }
+            if (c instanceof L.Marker) {
+              c.setOpacity(c.options.rutaAsociada === capaDestacada ? 1 : 0.1);
+            }
+          });
+
+          if (decoradorFlechas && decoradorFlechas.bringToFront) decoradorFlechas.bringToFront();
+        };
 
         // Evento de clic en la ruta
         gpxLayer.on("click", function(e) {
