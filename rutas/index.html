@@ -182,7 +182,6 @@ let rutaSeleccionada = null;
       rutaSeleccionada = null;
 
       grupos[nombreGrupo].forEach(ruta => {
-        // 1. Creamos la capa GPX
         const gpxLayer = new L.GPX(ruta.gpx, {
           async: true,
           polyline_options: { color: ruta.color, weight: 6, opacity: 0.8 },
@@ -191,7 +190,6 @@ let rutaSeleccionada = null;
 
         capasActivas.push(gpxLayer);
 
-        // --- LÓGICA DE CLIC (Ruta + Etiquetas) ---
         const manejarAccion = () => {
           if (rutaSeleccionada === gpxLayer) {
             window.open(ruta.url, "_blank");
@@ -199,13 +197,18 @@ let rutaSeleccionada = null;
             rutaSeleccionada = gpxLayer;
             
             capasActivas.forEach(c => {
-              // Si es una LÍNEA
               if (c.setStyle) { 
-                c === gpxLayer ? c.setStyle({weight: 8, opacity: 1}) : c.setStyle({weight: 4, opacity: 0.2});
+                if (c === gpxLayer) {
+                  // RUTA SELECCIONADA: 
+                  // dashArray: "10, 15" crea una línea de guiones que indica dirección
+                  c.setStyle({weight: 12, opacity: 1, dashArray: "10, 15"}); 
+                } else {
+                  // RUTAS NO SELECCIONADAS: 
+                  // Volvemos a línea sólida y fina
+                  c.setStyle({weight: 4, opacity: 0.2, dashArray: null}); 
+                }
               }
-              // Si es una ETIQUETA (Marcador)
               if (c instanceof L.Marker) {
-                // Si la etiqueta pertenece a esta ruta, se ve normal. Si no, casi invisible.
                 c.getElement().style.opacity = (c.options.rutaAsociada === gpxLayer) ? "1" : "0.1";
               }
             });
@@ -215,7 +218,6 @@ let rutaSeleccionada = null;
         gpxLayer.on("click", (e) => { L.DomEvent.stopPropagation(e); manejarAccion(); });
         gpxLayer.on("loaded", e => { if (ruta === grupos[nombreGrupo][0]) map.fitBounds(e.target.getBounds()); });
 
-        // 2. Etiquetas
         fetch(ruta.gpx).then(res => res.text()).then(str => {
           const data = new window.DOMParser().parseFromString(str, "text/xml");
           data.querySelectorAll("wpt").forEach(wpt => {
@@ -223,14 +225,13 @@ let rutaSeleccionada = null;
             const prohibidos = ["Inicio", "Fin", "Start", "End"];
             if (name && !prohibidos.includes(name)) {
               const marcador = L.marker([wpt.getAttribute("lat"), wpt.getAttribute("lon")], {
-                rutaAsociada: gpxLayer, // <-- VINCULAMOS LA ETIQUETA A LA RUTA
+                rutaAsociada: gpxLayer, 
                 icon: L.divIcon({
                   className: 'etiqueta-visible',
                   html: `<div style="color:${name === 'S' ? '#FFD700' : (name === 'X' ? 'red' : 'black')} !important;">${name}</div>`,
                   iconSize: [0, 0]
                 })
               }).addTo(map);
-              
               marcador.on("click", (e) => { L.DomEvent.stopPropagation(e); manejarAccion(); });
               capasActivas.push(marcador);
             }
@@ -241,11 +242,11 @@ let rutaSeleccionada = null;
       if(document.getElementById("menuPanel")) document.getElementById("menuPanel").style.display = "none";
     }
 
-    // RESET: Al tocar el mapa, todo vuelve a la normalidad (incluidas etiquetas)
+    // RESET: Importante añadir dashArray: null para que vuelvan a ser sólidas
     map.on("click", () => {
       rutaSeleccionada = null;
       capasActivas.forEach(c => { 
-        if (c.setStyle) c.setStyle({weight: 6, opacity: 0.8}); 
+        if (c.setStyle) c.setStyle({weight: 6, opacity: 0.8, dashArray: null}); 
         if (c instanceof L.Marker && c.getElement()) c.getElement().style.opacity = "1";
       });
     });
