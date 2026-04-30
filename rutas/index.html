@@ -247,7 +247,7 @@
       capasActivas.forEach(capa => map.removeLayer(capa));
       capasActivas = [];
 
-      // Cargamos las rutas del grupo elegido
+// Cargamos las rutas del grupo elegido
       grupos[nombreGrupo].forEach(ruta => {
         const gpxLayer = new L.GPX(ruta.gpx, {
           async: true,
@@ -261,11 +261,39 @@
         gpxLayer.on("loaded", e => {
           if (ruta === grupos[nombreGrupo][0]) map.fitBounds(e.target.getBounds());
         });
+
+        // --- NUEVO: Carga de etiquetas S y X para este grupo ---
+        fetch(ruta.gpx)
+          .then(response => response.text())
+          .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+          .then(data => {
+            const wpts = data.querySelectorAll("wpt");
+            wpts.forEach(wpt => {
+              const name = wpt.querySelector("name") ? wpt.querySelector("name").textContent : null;
+
+              if ((name === "S" || name === "X") && wpt.getAttribute("lat")) {
+                const lat = wpt.getAttribute("lat");
+                const lon = wpt.getAttribute("lon");
+
+                const marcadorEtiqueta = L.marker([lat, lon], {
+                  icon: L.divIcon({
+                    className: 'etiqueta-visible',
+                    html: `<div style="color:${name === 'S' ? 'yellow' : 'red'}">${name}</div>`,
+                    iconSize: [0, 0]
+                  })
+                }).addTo(map);
+
+                // IMPORTANTE: También guardamos los marcadores para borrarlos al cambiar de grupo
+                capasActivas.push(marcadorEtiqueta);
+              }
+            });
+          });
+        // --- FIN DE NUEVA CARGA ---
+
       });
       
       // Cerramos el menú al elegir
       document.getElementById("menuPanel").style.display = "none";
-    }
 
     // 2. Crear el botón del Menú en el mapa
     const menuControl = L.control({ position: 'topright' });
@@ -402,7 +430,8 @@ const labels = L.tileLayer(
         });
     });
 
-
+// Carga el primer grupo automáticamente al abrir la web
+cargarGrupo('Rodeando la Muela');
   </script>
 
 </body>
