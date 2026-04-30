@@ -174,69 +174,69 @@
     L.tileLayer("https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}").addTo(map);
 
    /* 3. FUNCIONES PRINCIPALES */
+  let rutaSeleccionada = null; // Variable para saber cuál está resaltada
+
     function cargarGrupo(nombreGrupo) {
-      // Limpiar mapa
+      // 1. Limpiar mapa
       capasActivas.forEach(capa => map.removeLayer(capa));
       capasActivas = [];
+      rutaSeleccionada = null;
 
-     // Cargar nuevas rutas
+      // 2. Cargar rutas
       grupos[nombreGrupo].forEach(ruta => {
         const gpxLayer = new L.GPX(ruta.gpx, {
           async: true,
           polyline_options: { color: ruta.color, weight: 6, opacity: 0.8 },
-          marker_options: { 
-            startIconUrl: null, 
-            endIconUrl: null, 
-            shadowUrl: null,
-            // ESTA LÍNEA ES LA QUIRÚRGICA:
-            // Elimina cualquier icono de waypoint que el plugin intente poner por defecto
-            wptIconUrls: { '': null } 
-          }
+          marker_options: { startIconUrl: null, endIconUrl: null, shadowUrl: null, wptIconUrls: { '': null } }
         }).addTo(map);
-
-        // --- CORRECCIÓN 1: Click en la línea de la ruta ---
-        gpxLayer.on("click", () => window.open(ruta.url, "_blank"));
 
         capasActivas.push(gpxLayer);
 
-        gpxLayer.on("loaded", e => {
-          if (ruta === grupos[nombreGrupo][0]) map.fitBounds(e.target.getBounds());
-        });
-
-        // Cargar S y X
-// 3. Carga de Waypoints (Todos menos Inicio/Fin)
-        fetch(ruta.gpx)
-          .then(res => res.text())
-          .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
-          .then(data => {
-            const wpts = data.querySelectorAll("wpt");
-            wpts.forEach(wpt => {
-              const lat = wpt.getAttribute("lat");
-              const lon = wpt.getAttribute("lon");
-              const name = wpt.querySelector("name") ? wpt.querySelector("name").textContent : null;
-
-              // --- FILTRO QUIRÚRGICO ---
-              // Definimos qué nombres queremos ignorar (puedes añadir más a la lista)
-              const nombresProhibidos = ["Inicio", "Fin", "Start", "End", "inicio", "fin"];
-              
-              if (name && lat && lon && !nombresProhibidos.includes(name)) {
-                const marcador = L.marker([lat, lon], {
-                  icon: L.divIcon({
-                    className: 'etiqueta-visible',
-                    // Si el nombre es S o X le damos color, si no, texto normal
-                    html: `<div style="color:${name === 'S' ? '#FFD700' : (name === 'X' ? 'red' : 'black')} !important;">${name}</div>`,
-                    iconSize: [0, 0]
-                  })
-                }).addTo(map);
-
-                marcador.on("click", () => window.open(ruta.url, "_blank"));
-                capasActivas.push(marcador);
+        // LÓGICA DE CLIC: 1º Resalta, 2º Abre enlace
+        const manejarAccion = () => {
+          if (rutaSeleccionada === gpxLayer) {
+            window.open(ruta.url, "_blank");
+          } else {
+            rutaSeleccionada = gpxLayer;
+            capasActivas.forEach(c => {
+              if (c.setStyle) { // Si es una línea
+                c === gpxLayer ? c.setStyle({weight: 12, opacity: 1}) : c.setStyle({weight: 4, opacity: 0.2});
               }
             });
+          }
+        };
+
+        gpxLayer.on("click", manejarAccion);
+        gpxLayer.on("loaded", e => { if (ruta === grupos[nombreGrupo][0]) map.fitBounds(e.target.getBounds()); });
+
+        // 3. Etiquetas (S, X y nombres)
+        fetch(ruta.gpx).then(res => res.text()).then(str => {
+          const data = new window.DOMParser().parseFromString(str, "text/xml");
+          data.querySelectorAll("wpt").forEach(wpt => {
+            const name = wpt.querySelector("name")?.textContent;
+            const prohibidos = ["Inicio", "Fin", "Start", "End"];
+            if (name && !prohibidos.includes(name)) {
+              const marcador = L.marker([wpt.getAttribute("lat"), wpt.getAttribute("lon")], {
+                icon: L.divIcon({
+                  className: 'etiqueta-visible',
+                  html: `<div style="color:${name === 'S' ? '#FFD700' : (name === 'X' ? 'red' : 'black')} !important;">${name}</div>`,
+                  iconSize: [0, 0]
+                })
+              }).addTo(map);
+              marcador.on("click", (e) => { L.DomEvent.stopPropagation(e); manejarAccion(); });
+              capasActivas.push(marcador);
+            }
           });
+        });
       });
       if(document.getElementById("menuPanel")) document.getElementById("menuPanel").style.display = "none";
     }
+
+    // RESET: Al tocar el mapa, todo vuelve a la normalidad
+    map.on("click", () => {
+      rutaSeleccionada = null;
+      capasActivas.forEach(c => { if (c.setStyle) c.setStyle({weight: 6, opacity: 0.8}); });
+    });
     /* 4. CONTROLES (BOTONES) */
     // Botón Info
     const infoControl = L.control({ position: 'topright' });
