@@ -178,10 +178,10 @@
 
    /* 3. FUNCIONES PRINCIPALES */
 let rutaSeleccionada = null; 
-    let decoradorFlechas = null; // Para guardar las flechas y poder quitarlas
+    let decoradorFlechas = null; 
 
     function cargarGrupo(nombreGrupo) {
-      // 1. Limpiar todo
+      // 1. Limpieza total antes de empezar
       capasActivas.forEach(capa => map.removeLayer(capa));
       if (decoradorFlechas) map.removeLayer(decoradorFlechas);
       capasActivas = [];
@@ -197,44 +197,58 @@ let rutaSeleccionada = null;
         capasActivas.push(gpxLayer);
 
         const manejarAccion = () => {
+          // Si pinchamos en la que ya está resaltada, vamos a la web
           if (rutaSeleccionada === gpxLayer) {
             window.open(ruta.url, "_blank");
-          } else {
-            rutaSeleccionada = gpxLayer;
-            
-            // Borrar flechas anteriores si las hubiera
-            if (decoradorFlechas) map.removeLayer(decoradorFlechas);
-
-            // CREAR FLECHAS NUEVAS
-            decoradorFlechas = L.polylineDecorator(gpxLayer, {
-              patterns: [
-                { 
-                  offset: '5%', 
-                  repeat: '60px', // Distancia entre flechas
-                  symbol: L.Symbol.arrowHead({
-                    pixelSize: 10, 
-                    polygon: true, 
-                    pathOptions: { stroke: false, fillOpacity: 1, color: 'white' } 
-                  }) 
-                }
-              ]
-            }).addTo(map);
-
-            capasActivas.forEach(c => {
-              if (c.setStyle) { 
-                c === gpxLayer ? c.setStyle({weight: 12, opacity: 1}) : c.setStyle({weight: 4, opacity: 0.2});
-              }
-              if (c instanceof L.Marker) {
-                c.getElement().style.opacity = (c.options.rutaAsociada === gpxLayer) ? "1" : "0.1";
-              }
-            });
+            return; 
           }
+
+          // Si es la primera vez que pinchamos, resaltamos
+          rutaSeleccionada = gpxLayer;
+
+          // A) Gestionar las flechas
+          if (decoradorFlechas) map.removeLayer(decoradorFlechas);
+          decoradorFlechas = L.polylineDecorator(gpxLayer, {
+            patterns: [{
+              offset: '5%', repeat: '60px',
+              symbol: L.Symbol.arrowHead({
+                pixelSize: 12, polygon: true,
+                pathOptions: { stroke: false, fillOpacity: 1, color: 'white' }
+              })
+            }]
+          }).addTo(map);
+
+          // B) Gestionar grosores y opacidades de las líneas
+          capasActivas.forEach(c => {
+            if (c.setStyle) {
+              if (c === gpxLayer) {
+                c.setStyle({ weight: 12, opacity: 1 });
+                c.bringToFront(); // Traemos la seleccionada al frente
+              } else {
+                c.setStyle({ weight: 4, opacity: 0.2 });
+              }
+            }
+            // C) Gestionar opacidad de las etiquetas (S, X...)
+            if (c instanceof L.Marker) {
+              if (c.options.rutaAsociada === gpxLayer) {
+                c.setOpacity(1);
+              } else {
+                c.setOpacity(0.1);
+              }
+            }
+          });
         };
 
-        gpxLayer.on("click", (e) => { L.DomEvent.stopPropagation(e); manejarAccion(); });
-        gpxLayer.on("loaded", e => { if (ruta === grupos[nombreGrupo][0]) map.fitBounds(e.target.getBounds()); });
+        gpxLayer.on("click", (e) => { 
+          L.DomEvent.stopPropagation(e); 
+          manejarAccion(); 
+        });
 
-        // Corregido el color de las etiquetas
+        gpxLayer.on("loaded", e => { 
+          if (ruta === grupos[nombreGrupo][0]) map.fitBounds(e.target.getBounds()); 
+        });
+
+        // Carga de etiquetas (S, X...)
         fetch(ruta.gpx).then(res => res.text()).then(str => {
           const data = new window.DOMParser().parseFromString(str, "text/xml");
           data.querySelectorAll("wpt").forEach(wpt => {
@@ -242,29 +256,34 @@ let rutaSeleccionada = null;
             const prohibidos = ["Inicio", "Fin", "Start", "End"];
             if (name && !prohibidos.includes(name)) {
               const marcador = L.marker([wpt.getAttribute("lat"), wpt.getAttribute("lon")], {
-                rutaAsociada: gpxLayer, 
+                rutaAsociada: gpxLayer,
                 icon: L.divIcon({
                   className: 'etiqueta-visible',
-                  html: `<div>${name}</div>`, // Quitamos el estilo inline que daba problemas
+                  html: `<div style="color: black !important;">${name}</div>`,
                   iconSize: [0, 0]
                 })
               }).addTo(map);
-              marcador.on("click", (e) => { L.DomEvent.stopPropagation(e); manejarAccion(); });
+              
+              marcador.on("click", (e) => { 
+                L.DomEvent.stopPropagation(e); 
+                manejarAccion(); 
+              });
               capasActivas.push(marcador);
             }
           });
         });
       });
+
       if(document.getElementById("menuPanel")) document.getElementById("menuPanel").style.display = "none";
     }
 
-    // RESET: Al tocar el mapa
+    // RESET: Al tocar cualquier parte vacía del mapa
     map.on("click", () => {
       rutaSeleccionada = null;
       if (decoradorFlechas) map.removeLayer(decoradorFlechas);
-      capasActivas.forEach(c => { 
-        if (c.setStyle) c.setStyle({weight: 6, opacity: 0.8}); 
-        if (c instanceof L.Marker && c.getElement()) c.getElement().style.opacity = "1";
+      capasActivas.forEach(c => {
+        if (c.setStyle) c.setStyle({ weight: 6, opacity: 0.8 });
+        if (c instanceof L.Marker) c.setOpacity(1);
       });
     });
     /* 4. CONTROLES (BOTONES) */
