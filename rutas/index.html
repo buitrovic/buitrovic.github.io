@@ -183,6 +183,7 @@
       rutaSeleccionada = null;
 
       // 2. Cargar rutas
+// 2. Cargar rutas
       grupos[nombreGrupo].forEach(ruta => {
         const gpxLayer = new L.GPX(ruta.gpx, {
           async: true,
@@ -192,24 +193,32 @@
 
         capasActivas.push(gpxLayer);
 
-        // LÓGICA DE CLIC: 1º Resalta, 2º Abre enlace
+        // --- LÓGICA DE CLIC MEJORADA ---
         const manejarAccion = () => {
+          // Comparamos si la capa que hemos tocado es la que ya estaba seleccionada
           if (rutaSeleccionada === gpxLayer) {
             window.open(ruta.url, "_blank");
           } else {
             rutaSeleccionada = gpxLayer;
+            // Aplicamos el estilo a todas las capas del grupo
             capasActivas.forEach(c => {
-              if (c.setStyle) { // Si es una línea
+              if (c.setStyle) { 
+                // Si es la elegida: grosor 12. Si no: grosor 4 y transparente.
                 c === gpxLayer ? c.setStyle({weight: 12, opacity: 1}) : c.setStyle({weight: 4, opacity: 0.2});
               }
             });
           }
         };
 
-        gpxLayer.on("click", manejarAccion);
+        // IMPORTANTE: Escuchamos el click en la capa GPX
+        gpxLayer.on("click", (e) => {
+          L.DomEvent.stopPropagation(e); // Evitamos que el mapa "limpie" la selección antes de tiempo
+          manejarAccion();
+        });
+
         gpxLayer.on("loaded", e => { if (ruta === grupos[nombreGrupo][0]) map.fitBounds(e.target.getBounds()); });
 
-        // 3. Etiquetas (S, X y nombres)
+        // 3. Etiquetas (S, X y nombres) - Sigue igual pero usando manejarAccion()
         fetch(ruta.gpx).then(res => res.text()).then(str => {
           const data = new window.DOMParser().parseFromString(str, "text/xml");
           data.querySelectorAll("wpt").forEach(wpt => {
@@ -223,7 +232,12 @@
                   iconSize: [0, 0]
                 })
               }).addTo(map);
-              marcador.on("click", (e) => { L.DomEvent.stopPropagation(e); manejarAccion(); });
+              
+              // Al hacer click en etiqueta, llamamos a la misma función
+              marcador.on("click", (e) => { 
+                L.DomEvent.stopPropagation(e); 
+                manejarAccion(); 
+              });
               capasActivas.push(marcador);
             }
           });
