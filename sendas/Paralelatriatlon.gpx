@@ -12,6 +12,8 @@
   <time>2026-05-01T10:11:53.918Z</time>
   <bounds minlat="39.869663" minlon="-0.560367" maxlat="39.880745" maxlon="-0.526206"/>
 </metadata>
+<wpt lat="39.870583" lon="-0.543344"><ele>669.973</ele><name>Paralela triatlón</name><desc>Divertida</desc></wpt>
+  
 <trk>
   <trkseg>
     <trkpt lat="39.87336" lon="-0.548404"><ele>626</ele><time>2024-06-23T07:32:08.147Z</time></trkpt>
