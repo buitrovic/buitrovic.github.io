@@ -12,6 +12,8 @@
   <time>2026-05-01T10:09:02.798Z</time>
   <bounds minlat="39.885599" minlon="-0.576439" maxlat="39.907757" maxlon="-0.508118"/>
 </metadata>
+<wpt lat="39.900164" lon="-0.533399"><ele>418.368</ele><name>Paredes</name><desc>Divertida</desc></wpt>
+
 <trk>
   <trkseg>
     <trkpt lat="39.896831" lon="-0.537214"><ele>446</ele><time>2025-06-08T06:33:48.498Z</time></trkpt>
