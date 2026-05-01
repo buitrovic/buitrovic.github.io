@@ -12,6 +12,9 @@
   <time>2026-05-01T10:15:37.309Z</time>
   <bounds minlat="39.895514" minlon="-0.610986" maxlat="39.906593" maxlon="-0.576825"/>
 </metadata>
+<wpt lat="39.899953" lon="-0.596613"><ele>531.184</ele><name>Los Lirios</name></wpt>
+
+
 <trk>
   <trkseg>
     <trkpt lat="39.899473" lon="-0.59221"><ele>597</ele><time>2024-08-02T07:19:43.121Z</time></trkpt>
