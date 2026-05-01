@@ -12,6 +12,8 @@
   <time>2026-05-01T09:51:41.822Z</time>
   <bounds minlat="39.937251" minlon="-0.5791" maxlat="39.959392" maxlon="-0.510778"/>
 </metadata>
+<wpt lat="39.948195" lon="-0.550706"><ele>625</ele><name>Senda Caudiel</name></wpt>
+
 <trk>
   <trkseg>
     <trkpt lat="39.951431" lon="-0.558071"><ele>617.918</ele><time>2025-01-25T08:52:16.108Z</time></trkpt>
