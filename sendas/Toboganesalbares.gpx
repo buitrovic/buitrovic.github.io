@@ -12,6 +12,9 @@
   <time>2026-05-01T10:00:16.855Z</time>
   <bounds minlat="39.856258" minlon="-0.607381" maxlat="39.878426" maxlon="-0.53906"/>
 </metadata>
+<wpt lat="39.862423" lon="-0.561247"><ele>603.586</ele><name>Toboganes Altura</name><desc>Divertida</desc></wpt>
+
+
 <trk>
   <trkseg>
     <trkpt lat="39.865727" lon="-0.554177"><ele>655</ele><time>2025-09-04T19:41:15.486Z</time></trkpt>
