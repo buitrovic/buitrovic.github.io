@@ -12,6 +12,8 @@
   <time>2026-04-26T21:17:22.539Z</time>
   <bounds minlat="39.859616" minlon="-0.606737" maxlat="39.903942" maxlon="-0.470095"/>
 </metadata>
+
+  <!-- Esto es para poner texto visible
 <wpt lat="39.869886" lon="-0.560077">
   <name>O</name>
   <desc>INICIO (Amarillo/Blanco)</desc>
@@ -20,7 +22,7 @@
 <wpt lat="39.878496" lon="-0.556483">
   <name>X</name>
   <desc>FIN (Rojo/Blanco)</desc>
-</wpt>
+</wpt>   -->
 
 
 
