@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx creator="WTracks"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" version="1.1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata>
+  <name>Wikiloc - 2025- Jérica Nº1- 2 No rodadora. Sendas. Paredes, Novaliches, Caudiel, Pistas de Benafer.</name>
+  <desc></desc>
+  <author><name>WTracks</name></author>
+  <link href='https://opoto.github.io/wtracks/'>
+    <text>WTracks</text>
+    <type>text/html</type>
+  </link>
+  <time>2026-05-01T10:09:02.798Z</time>
+  <bounds minlat="39.885599" minlon="-0.576439" maxlat="39.907757" maxlon="-0.508118"/>
+</metadata>
+<trk>
+  <trkseg>
+    <trkpt lat="39.896831" lon="-0.537214"><ele>446</ele><time>2025-06-08T06:33:48.498Z</time></trkpt>
+    <trkpt lat="39.897314" lon="-0.53721"><ele>453.475</ele><time>2025-06-08T06:35:49.498Z</time></trkpt>
+    <trkpt lat="39.897094" lon="-0.535528"><ele>454.869</ele><time>2025-06-08T06:36:29.491Z</time></trkpt>
+    <trkpt lat="39.896583" lon="-0.53414"><ele>442.547</ele><time>2025-06-08T06:36:50.504Z</time></trkpt>
+    <trkpt lat="39.896855" lon="-0.53401"><ele>442.829</ele><time>2025-06-08T06:37:50.497Z</time></trkpt>
+    <trkpt lat="39.896995" lon="-0.533693"><ele>438.921</ele><time>2025-06-08T06:38:05.494Z</time></trkpt>
+    <trkpt lat="39.897268" lon="-0.533565"><ele>434.809</ele><time>2025-06-08T06:38:11.507Z</time></trkpt>
+    <trkpt lat="39.89771" lon="-0.533805"><ele>435.286</ele><time>2025-06-08T06:38:21.500Z</time></trkpt>
+    <trkpt lat="39.898332" lon="-0.534625"><ele>427.646</ele><time>2025-06-08T06:38:36.499Z</time></trkpt>
+    <trkpt lat="39.898581" lon="-0.535429"><ele>429.291</ele><time>2025-06-08T06:38:49.499Z</time></trkpt>
+    <trkpt lat="39.899071" lon="-0.535457"><ele>417.238</ele><time>2025-06-08T06:39:04.498Z</time></trkpt>
+    <trkpt lat="39.899345" lon="-0.535259"><ele>418.651</ele><time>2025-06-08T06:39:17.498Z</time></trkpt>
+    <trkpt lat="39.899205" lon="-0.534513"><ele>416.964</ele><time>2025-06-08T06:39:38.498Z</time></trkpt>
+    <trkpt lat="39.900164" lon="-0.533399"><ele>418.368</ele><time>2025-06-08T06:40:18.498Z</time></trkpt>
+    <trkpt lat="39.900604" lon="-0.533412"><ele>422.328</ele><time>2025-06-08T06:40:26.498Z</time></trkpt>
+    <trkpt lat="39.900861" lon="-0.533269"><ele>421.342</ele><time>2025-06-08T06:40:32.499Z</time></trkpt>
+    <trkpt lat="39.901052" lon="-0.532644"><ele>416.382</ele><time>2025-06-08T06:40:43.498Z</time></trkpt>
+    <trkpt lat="39.901603" lon="-0.532078"><ele>414.943</ele><time>2025-06-08T06:40:56.499Z</time></trkpt>
+    <trkpt lat="39.902901" lon="-0.532231"><ele>424.617</ele><time>2025-06-08T06:41:45.498Z</time></trkpt>
+    <trkpt lat="39.904636" lon="-0.534086"><ele>430.209</ele><time>2025-06-08T06:42:58.498Z</time></trkpt>
+    <trkpt lat="39.905485" lon="-0.534782"><ele>435.66</ele><time>2025-06-08T06:44:37.498Z</time></trkpt>
+    <trkpt lat="39.906406" lon="-0.53529"><ele>439.13</ele><time>2025-06-08T06:45:05.498Z</time></trkpt>
+    <trkpt lat="39.906804" lon="-0.535041"><ele>439.815</ele><time>2025-06-08T06:45:21.498Z</time></trkpt>
+    <trkpt lat="39.906959" lon="-0.535402"><ele>443.552</ele><time>2025-06-08T06:45:33.498Z</time></trkpt>
+    <trkpt lat="39.907613" lon="-0.535837"><ele>447.615</ele><time>2025-06-08T06:45:57.498Z</time></trkpt>
+    <trkpt lat="39.908867" lon="-0.537478"><ele>455.818</ele><time>2025-06-08T06:46:58.498Z</time></trkpt>
+    <trkpt lat="39.909641" lon="-0.538757"><ele>458.992</ele><time>2025-06-08T06:47:42.499Z</time></trkpt>
+    <trkpt lat="39.909392" lon="-0.539757"><ele>463.382</ele><time>2025-06-08T06:48:14.498Z</time></trkpt>
+    <trkpt lat="39.90937" lon="-0.54089"><ele>470.876</ele><time>2025-06-08T06:48:49.498Z</time></trkpt>
+    <trkpt lat="39.909687" lon="-0.542741"><ele>493.412</ele><time>2025-06-08T06:50:07.498Z</time></trkpt>
+    <trkpt lat="39.909931" lon="-0.543039"><ele>493.732</ele><time>2025-06-08T06:50:22.498Z</time></trkpt>
+    <trkpt lat="39.910146" lon="-0.5437"><ele>494.505</ele><time>2025-06-08T06:50:48.498Z</time></trkpt>
+    <trkpt lat="39.910649" lon="-0.544162"><ele>497.009</ele><time>2025-06-08T06:51:17.499Z</time></trkpt>
+    <trkpt lat="39.910882" lon="-0.544717"><ele>498.483</ele><time>2025-06-08T06:51:33.499Z</time></trkpt>
+    <trkpt lat="39.911054" lon="-0.54682"><ele>482.223</ele><time>2025-06-08T06:52:16.498Z</time></trkpt>
+    <trkpt lat="39.910973" lon="-0.547255"><ele>479.868</ele><time>2025-06-08T06:52:26.498Z</time></trkpt>
+  </trkseg>
+</trk></gpx>

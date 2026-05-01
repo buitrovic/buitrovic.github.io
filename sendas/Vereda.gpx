@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx creator="WTracks"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" version="1.1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata>
+  <name>Wikiloc - 2025 Jérica Nº1-3. Aeróbica, senda vereda Molinera, de Caudiel.</name>
+  <desc></desc>
+  <author><name>WTracks</name></author>
+  <link href='https://opoto.github.io/wtracks/'>
+    <text>WTracks</text>
+    <type>text/html</type>
+  </link>
+  <time>2026-05-01T09:55:00.462Z</time>
+  <bounds minlat="39.956037" minlon="-0.629525" maxlat="39.978173" maxlon="-0.561204"/>
+</metadata>
+<trk>
+  <trkseg>
+    <trkpt lat="39.981002" lon="-0.599464"><ele>806.309</ele></trkpt>
+    <trkpt lat="39.980229" lon="-0.598916"><ele>801.578</ele></trkpt>
+    <trkpt lat="39.980039" lon="-0.598619"><ele>800.478</ele></trkpt>
+    <trkpt lat="39.979882" lon="-0.598712"><ele>797.775</ele></trkpt>
+    <trkpt lat="39.979714" lon="-0.598587"><ele>795.152</ele></trkpt>
+    <trkpt lat="39.979555" lon="-0.598819"><ele>795.521</ele></trkpt>
+    <trkpt lat="39.979171" lon="-0.59874"><ele>798.894</ele></trkpt>
+    <trkpt lat="39.978307" lon="-0.59838"><ele>796.715</ele></trkpt>
+    <trkpt lat="39.978266" lon="-0.598177"><ele>792.84</ele></trkpt>
+    <trkpt lat="39.977344" lon="-0.597817"><ele>795.24</ele></trkpt>
+    <trkpt lat="39.976996" lon="-0.597858"><ele>798.173</ele></trkpt>
+    <trkpt lat="39.97555" lon="-0.597445"><ele>781.885</ele></trkpt>
+    <trkpt lat="39.975315" lon="-0.597904"><ele>781.013</ele></trkpt>
+    <trkpt lat="39.97436" lon="-0.598215"><ele>771.809</ele></trkpt>
+    <trkpt lat="39.973926" lon="-0.598641"><ele>768.219</ele></trkpt>
+    <trkpt lat="39.973294" lon="-0.598744"><ele>767.359</ele></trkpt>
+    <trkpt lat="39.972551" lon="-0.598616"><ele>754.016</ele></trkpt>
+    <trkpt lat="39.971727" lon="-0.599137"><ele>757.863</ele></trkpt>
+    <trkpt lat="39.971388" lon="-0.599175"><ele>754.132</ele></trkpt>
+    <trkpt lat="39.97037" lon="-0.600188"><ele>749.635</ele></trkpt>
+    <trkpt lat="39.969431" lon="-0.600586"><ele>746.596</ele></trkpt>
+    <trkpt lat="39.968496" lon="-0.601328"><ele>732.521</ele></trkpt>
+    <trkpt lat="39.967729" lon="-0.602232"><ele>725.011</ele></trkpt>
+    <trkpt lat="39.966737" lon="-0.602715"><ele>712.357</ele></trkpt>
+    <trkpt lat="39.96664" lon="-0.603327"><ele>715.7</ele></trkpt>
+    <trkpt lat="39.966357" lon="-0.603637"><ele>718.62</ele></trkpt>
+    <trkpt lat="39.965795" lon="-0.603448"><ele>720.209</ele></trkpt>
+    <trkpt lat="39.965051" lon="-0.603507"><ele>717.887</ele></trkpt>
+    <trkpt lat="39.963994" lon="-0.603239"><ele>709.897</ele></trkpt>
+    <trkpt lat="39.962374" lon="-0.603481"><ele>707.414</ele></trkpt>
+    <trkpt lat="39.961564" lon="-0.603138"><ele>702.531</ele></trkpt>
+    <trkpt lat="39.960925" lon="-0.603155"><ele>696.09</ele></trkpt>
+    <trkpt lat="39.960389" lon="-0.60259"><ele>693.463</ele></trkpt>
+    <trkpt lat="39.959887" lon="-0.602472"><ele>692.934</ele></trkpt>
+    <trkpt lat="39.958352" lon="-0.601544"><ele>686.639</ele></trkpt>
+    <trkpt lat="39.957618" lon="-0.601432"><ele>688.659</ele></trkpt>
+    <trkpt lat="39.957291" lon="-0.601137"><ele>688.588</ele></trkpt>
+  </trkseg>
+</trk></gpx>

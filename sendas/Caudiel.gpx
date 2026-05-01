@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx creator="WTracks"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" version="1.1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata>
+  <name>Wikiloc - 2025 Jérica Nº1-3. Aeróbica, senda vereda Molinera, de Caudiel.</name>
+  <desc></desc>
+  <author><name>WTracks</name></author>
+  <link href='https://opoto.github.io/wtracks/'>
+    <text>WTracks</text>
+    <type>text/html</type>
+  </link>
+  <time>2026-05-01T09:51:41.822Z</time>
+  <bounds minlat="39.937251" minlon="-0.5791" maxlat="39.959392" maxlon="-0.510778"/>
+</metadata>
+<trk>
+  <trkseg>
+    <trkpt lat="39.951431" lon="-0.558071"><ele>617.918</ele><time>2025-01-25T08:52:16.108Z</time></trkpt>
+    <trkpt lat="39.951705" lon="-0.55689"><ele>618.898</ele><time>2025-01-25T08:52:58.097Z</time></trkpt>
+    <trkpt lat="39.951811" lon="-0.555703"><ele>617.017</ele><time>2025-01-25T08:53:17.111Z</time></trkpt>
+    <trkpt lat="39.951255" lon="-0.554737"><ele>617.809</ele><time>2025-01-25T08:53:45.112Z</time></trkpt>
+    <trkpt lat="39.950383" lon="-0.553663"><ele>623.163</ele><time>2025-01-25T08:54:27.104Z</time></trkpt>
+    <trkpt lat="39.950305" lon="-0.553283"><ele>624.593</ele><time>2025-01-25T08:54:39.096Z</time></trkpt>
+    <trkpt lat="39.950447" lon="-0.552598"><ele>626.96</ele><time>2025-01-25T08:54:55.112Z</time></trkpt>
+    <trkpt lat="39.950207" lon="-0.552157"><ele>626.787</ele><time>2025-01-25T08:55:08.112Z</time></trkpt>
+    <trkpt lat="39.950339" lon="-0.551492"><ele>629.336</ele><time>2025-01-25T08:55:31.104Z</time></trkpt>
+    <trkpt lat="39.950079" lon="-0.550825"><ele>632.149</ele><time>2025-01-25T08:55:53.101Z</time></trkpt>
+    <trkpt lat="39.950103" lon="-0.550361"><ele>633.37</ele><time>2025-01-25T08:56:08.103Z</time></trkpt>
+    <trkpt lat="39.94951" lon="-0.549992"><ele>627.255</ele><time>2025-01-25T08:56:23.114Z</time></trkpt>
+    <trkpt lat="39.948949" lon="-0.55014"><ele>627.675</ele><time>2025-01-25T08:56:50.095Z</time></trkpt>
+    <trkpt lat="39.949008" lon="-0.550505"><ele>627.214</ele><time>2025-01-25T08:56:59.103Z</time></trkpt>
+    <trkpt lat="39.948777" lon="-0.550737"><ele>625.954</ele><time>2025-01-25T08:57:05.109Z</time></trkpt>
+    <trkpt lat="39.948195" lon="-0.550706"><ele>625.009</ele><time>2025-01-25T08:57:13.108Z</time></trkpt>
+    <trkpt lat="39.947441" lon="-0.550392"><ele>621.609</ele><time>2025-01-25T08:57:26.097Z</time></trkpt>
+    <trkpt lat="39.947038" lon="-0.550456"><ele>618.223</ele><time>2025-01-25T08:57:34.113Z</time></trkpt>
+    <trkpt lat="39.945684" lon="-0.549157"><ele>604.993</ele><time>2025-01-25T08:57:59.105Z</time></trkpt>
+    <trkpt lat="39.94399" lon="-0.546387"><ele>598.74</ele><time>2025-01-25T08:58:43.108Z</time></trkpt>
+    <trkpt lat="39.943493" lon="-0.546046"><ele>597.517</ele><time>2025-01-25T08:58:52.101Z</time></trkpt>
+    <trkpt lat="39.942574" lon="-0.544996"><ele>594.546</ele><time>2025-01-25T08:59:12.113Z</time></trkpt>
+    <trkpt lat="39.941609" lon="-0.543155"><ele>579.599</ele><time>2025-01-25T08:59:41.101Z</time></trkpt>
+    <trkpt lat="39.940473" lon="-0.542547"><ele>568.36</ele><time>2025-01-25T09:00:00.097Z</time></trkpt>
+    <trkpt lat="39.940114" lon="-0.54258"><ele>568.285</ele><time>2025-01-25T09:00:09.103Z</time></trkpt>
+    <trkpt lat="39.939869" lon="-0.542362"><ele>566.585</ele><time>2025-01-25T09:00:16.101Z</time></trkpt>
+    <trkpt lat="39.939214" lon="-0.542312"><ele>565.037</ele><time>2025-01-25T09:00:29.108Z</time></trkpt>
+    <trkpt lat="39.938437" lon="-0.541698"><ele>558.549</ele><time>2025-01-25T09:00:42.108Z</time></trkpt>
+    <trkpt lat="39.938247" lon="-0.541998"><ele>557.513</ele><time>2025-01-25T09:00:49.112Z</time></trkpt>
+    <trkpt lat="39.938291" lon="-0.542321"><ele>558.809</ele><time>2025-01-25T09:00:55.108Z</time></trkpt>
+    <trkpt lat="39.937913" lon="-0.542448"><ele>553.295</ele><time>2025-01-25T09:01:05.113Z</time></trkpt>
+    <trkpt lat="39.937365" lon="-0.541788"><ele>551.135</ele><time>2025-01-25T09:01:18.107Z</time></trkpt>
+    <trkpt lat="39.937019" lon="-0.541195"><ele>546</ele></trkpt>
+    <trkpt lat="39.937126" lon="-0.541066"><ele>546</ele></trkpt>
+    <trkpt lat="39.936781" lon="-0.540283"><ele>545</ele></trkpt>
+  </trkseg>
+</trk></gpx>

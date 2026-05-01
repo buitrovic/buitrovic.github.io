@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx creator="WTracks"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" version="1.1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata>
+  <name>Wikiloc - 2025 - Jérica Nº3-4. Circular a la Muela larga con muchas 'cosas', pero todas realizables, nivel medio.</name>
+  <desc></desc>
+  <author><name>WTracks</name></author>
+  <link href='https://opoto.github.io/wtracks/'>
+    <text>WTracks</text>
+    <type>text/html</type>
+  </link>
+  <time>2026-05-01T10:00:16.855Z</time>
+  <bounds minlat="39.856258" minlon="-0.607381" maxlat="39.878426" maxlon="-0.53906"/>
+</metadata>
+<trk>
+  <trkseg>
+    <trkpt lat="39.865727" lon="-0.554177"><ele>655</ele><time>2025-09-04T19:41:15.486Z</time></trkpt>
+    <trkpt lat="39.865537" lon="-0.554606"><ele>655</ele></trkpt>
+    <trkpt lat="39.865232" lon="-0.55467"><ele>655.215</ele><time>2025-09-04T19:40:55.486Z</time></trkpt>
+    <trkpt lat="39.865207" lon="-0.555013"><ele>654.416</ele><time>2025-09-04T19:40:45.486Z</time></trkpt>
+    <trkpt lat="39.865396" lon="-0.555335"><ele>651.273</ele><time>2025-09-04T19:40:35.486Z</time></trkpt>
+    <trkpt lat="39.865059" lon="-0.557148"><ele>638.664</ele><time>2025-09-04T19:40:05.486Z</time></trkpt>
+    <trkpt lat="39.864812" lon="-0.557503"><ele>635.071</ele><time>2025-09-04T19:39:55.486Z</time></trkpt>
+    <trkpt lat="39.864779" lon="-0.55791"><ele>629.789</ele><time>2025-09-04T19:39:45.486Z</time></trkpt>
+    <trkpt lat="39.864103" lon="-0.558833"><ele>625.788</ele><time>2025-09-04T19:39:25.486Z</time></trkpt>
+    <trkpt lat="39.863749" lon="-0.559702"><ele>625.046</ele><time>2025-09-04T19:31:45.485Z</time></trkpt>
+    <trkpt lat="39.863543" lon="-0.559702"><ele>624.45</ele><time>2025-09-04T19:31:55.485Z</time></trkpt>
+    <trkpt lat="39.863362" lon="-0.559895"><ele>623.158</ele><time>2025-09-04T19:32:05.485Z</time></trkpt>
+    <trkpt lat="39.863354" lon="-0.56011"><ele>622.652</ele><time>2025-09-04T19:32:15.485Z</time></trkpt>
+    <trkpt lat="39.863057" lon="-0.560303"><ele>617.617</ele><time>2025-09-04T19:32:25.485Z</time></trkpt>
+    <trkpt lat="39.862686" lon="-0.56026"><ele>610.909</ele><time>2025-09-04T19:32:45.485Z</time></trkpt>
+    <trkpt lat="39.862324" lon="-0.560399"><ele>605.357</ele><time>2025-09-04T19:33:05.485Z</time></trkpt>
+    <trkpt lat="39.86225" lon="-0.560582"><ele>604.368</ele><time>2025-09-04T19:33:15.485Z</time></trkpt>
+    <trkpt lat="39.861986" lon="-0.560571"><ele>597.255</ele><time>2025-09-04T19:33:25.485Z</time></trkpt>
+    <trkpt lat="39.862423" lon="-0.561247"><ele>603.586</ele><time>2025-09-04T19:33:55.486Z</time></trkpt>
+    <trkpt lat="39.862275" lon="-0.56144"><ele>600.523</ele><time>2025-09-04T19:34:05.486Z</time></trkpt>
+    <trkpt lat="39.861929" lon="-0.561451"><ele>596.951</ele><time>2025-09-04T19:34:15.486Z</time></trkpt>
+    <trkpt lat="39.861739" lon="-0.561976"><ele>588.29</ele><time>2025-09-04T19:34:25.486Z</time></trkpt>
+    <trkpt lat="39.861146" lon="-0.562191"><ele>584.388</ele><time>2025-09-04T19:34:45.486Z</time></trkpt>
+    <trkpt lat="39.860619" lon="-0.562609"><ele>576.512</ele><time>2025-09-04T19:35:05.486Z</time></trkpt>
+    <trkpt lat="39.860293" lon="-0.562384"><ele>570.271</ele><time>2026-05-01T10:20:07.778Z</time></trkpt>
+  </trkseg>
+</trk></gpx>

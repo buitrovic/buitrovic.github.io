@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx creator="WTracks"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/1" version="1.1" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata>
+  <name>Wikiloc - 2025-Jérica Nº2 b) La losa y el Pasico Alemán, con Lírios, circuitos y Cortafuegos (OJO),Vuelta por la Vegatilla.</name>
+  <desc></desc>
+  <author><name>WTracks</name></author>
+  <link href='https://opoto.github.io/wtracks/'>
+    <text>WTracks</text>
+    <type>text/html</type>
+  </link>
+  <time>2026-05-01T10:15:37.309Z</time>
+  <bounds minlat="39.895514" minlon="-0.610986" maxlat="39.906593" maxlon="-0.576825"/>
+</metadata>
+<trk>
+  <trkseg>
+    <trkpt lat="39.899473" lon="-0.59221"><ele>597</ele><time>2024-08-02T07:19:43.121Z</time></trkpt>
+    <trkpt lat="39.899281" lon="-0.59264"><ele>595.025</ele><time>2024-08-02T07:19:58.127Z</time></trkpt>
+    <trkpt lat="39.899694" lon="-0.593164"><ele>583.709</ele><time>2024-08-02T07:20:33.132Z</time></trkpt>
+    <trkpt lat="39.900297" lon="-0.594378"><ele>566.09</ele><time>2024-08-02T07:20:57.112Z</time></trkpt>
+    <trkpt lat="39.899858" lon="-0.595029"><ele>555.718</ele><time>2024-08-02T07:21:10.116Z</time></trkpt>
+    <trkpt lat="39.899953" lon="-0.596613"><ele>531.184</ele><time>2024-08-02T07:21:34.123Z</time></trkpt>
+    <trkpt lat="39.90012" lon="-0.597003"><ele>528.582</ele><time>2024-08-02T07:21:44.119Z</time></trkpt>
+    <trkpt lat="39.89998" lon="-0.598272"><ele>519.985</ele><time>2024-08-02T07:22:19.117Z</time></trkpt>
+    <trkpt lat="39.899858" lon="-0.598064"><ele>516.896</ele><time>2024-08-02T07:22:32.106Z</time></trkpt>
+    <trkpt lat="39.899755" lon="-0.598178"><ele>521.928</ele><time>2024-08-02T07:22:58.144Z</time></trkpt>
+    <trkpt lat="39.899437" lon="-0.597461"><ele>522.047</ele><time>2024-08-02T07:23:42.116Z</time></trkpt>
+  </trkseg>
+</trk></gpx>
