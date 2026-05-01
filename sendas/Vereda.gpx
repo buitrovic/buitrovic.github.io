@@ -12,6 +12,8 @@
   <time>2026-05-01T09:55:00.462Z</time>
   <bounds minlat="39.956037" minlon="-0.629525" maxlat="39.978173" maxlon="-0.561204"/>
 </metadata>
+<wpt lat="39.968496" lon="-0.601328"><ele>732.521</ele><name>Vereda Molinera</name><desc>Divertida</desc></wpt>
+
 <trk>
   <trkseg>
     <trkpt lat="39.981002" lon="-0.599464"><ele>806.309</ele></trkpt>
